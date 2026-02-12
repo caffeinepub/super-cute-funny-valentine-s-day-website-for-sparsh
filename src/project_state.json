@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Single-page cute/funny Valentine’s website for Sparsh, now with an intro pop-up Valentine question screen before the main wishing page.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-valentine-s-day-website-experience-that-wishes-sparsh-a-happy-valentine-s-day-with-a-super-cute-and-funny-tone-including-a-prominent-headline-a-short-personalized-message-addressing-sparsh-and-playful-microcopy-throughout-all-user-facing-text-in-english",
+      "title": "Create a single-page Valentine's Day website experience that wishes Sparsh a Happy Valentine's Day with a super cute and funny tone, including a prominent headline, a short personalized message addressing “Sparsh”, and playful microcopy throughout (all user-facing text in English).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-lightweight-interactive-elements-to-make-the-page-feel-fun-and-gift-like-such-as-a-button-that-reveals-a-surprise-message-a-small-set-of-rotating-cute-funny-one-liners-and-a-simple-animation-effect-e-g-floating-hearts-that-does-not-block-reading-or-navigation",
+      "title": "Add lightweight interactive elements to make the page feel fun and “gift-like”, such as a button that reveals a surprise message, a small set of rotating cute/funny one-liners, and a simple animation effect (e.g., floating hearts) that does not block reading or navigation.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-coherent-distinctive-visual-theme-suitable-for-a-valentine-s-greeting-colors-typography-layout-and-decorative-motifs-and-apply-it-consistently-across-the-page-avoid-a-default-stock-look-do-not-use-a-blue-purple-theme",
+      "title": "Implement a coherent, distinctive visual theme suitable for a Valentine’s greeting (colors, typography, layout, and decorative motifs) and apply it consistently across the page. Avoid a default/stock look; do not use a blue & purple theme.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-include-custom-static-illustration-assets-and-render-them-in-the-ui-from-frontend-public-assets-generated-do-not-serve-images-from-the-backend",
+      "title": "Generate and include custom static illustration assets and render them in the UI from frontend/public/assets/generated (do not serve images from the backend).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-site-is-responsive-and-accessible-readable-text-contrast-keyboard-accessible-buttons-sensible-heading-structure-and-a-pleasant-mobile-layout",
+      "title": "Ensure the site is responsive and accessible: readable text contrast, keyboard-accessible buttons, sensible heading structure, and a pleasant mobile layout.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-built-with-love-using-caffeine-ai-line-including-the-caffeine-ai-link-from-the-footer-at-the-end-of-the-page-leaving-the-rest-of-the-footer-intact",
+      "title": "Remove the “Built with love using caffeine.ai” line (including the caffeine.ai link) from the footer at the end of the page, leaving the rest of the footer intact.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-every-instance-of-the-phrase-i-love-you-with-i-like-you-across-all-user-facing-copy-on-the-site-including-hero-copy-and-rotating-one-liners",
+      "title": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-intro-overlay-screen-that-appears-before-the-existing-valentine-wishing-page-content-showing-a-full-screen-rose-petal-animation-and-the-question-text-will-you-be-my-valentine-with-two-options-yes-and-no-clicking-yes-must-proceed-to-the-existing-wishing-page-content",
+      "title": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-intro-overlay-no-button-playfully-evade-interaction-when-the-user-tries-to-click-tap-it-it-moves-away-so-it-cannot-be-clicked-while-remaining-responsive-and-accessible-including-reduced-motion-support",
+      "title": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a super cute and funny Valentine's Day website to wish boyfriend Sparsh",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Remove the “Built with love using caffeine.ai” line from the end of the page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Replace all instances of “I love you” with “I like you” across the site copy",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add an intro pop-up screen with full-screen rose petal animation and a “Will you be my Valentine?” Yes/No choice (Yes proceeds; No button playfully evades clicks)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Super cute & funny Valentine's Day website for Sparsh",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

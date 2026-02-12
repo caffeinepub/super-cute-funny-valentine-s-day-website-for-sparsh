@@ -1,0 +1,87 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Valentine intro overlay with rose petals + playful evasive No, and copy tweak",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Replace all user-facing occurrences of “I love you” with “I like you” (hero copy and rotating one-liners).",
+      "acceptanceCriteria": [
+        "The hero paragraph in App content no longer contains “I love you” and uses “I like you” instead.",
+        "The rotating one-liners list no longer contains “I love you” and uses “I like you” instead.",
+        "A search across the frontend source for the exact string “I love you” returns no user-facing occurrences (case-sensitive match)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update hero user-facing paragraph copy to replace the exact phrase “I love you” with “I like you”, keeping all text in English."
+        },
+        {
+          "path": "frontend/src/components/valentine/RotatingOneLiners.tsx",
+          "operation": "modify",
+          "description": "Update rotating one-liners array to replace the exact phrase “I love you” with “I like you”, ensuring no remaining case-sensitive user-facing occurrences."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add a full-screen intro overlay with rose petal animation and “Will you be my Valentine?” prompt that gates the existing wishing page content until “Yes”.",
+      "acceptanceCriteria": [
+        "On initial load, the intro overlay is shown instead of the wishing page content.",
+        "The intro overlay includes a full-screen rose petal animation (petals visible across the screen).",
+        "The intro overlay displays the exact question text: “Will you be my Valentine?”",
+        "There are two visible buttons labeled “Yes” and “No”.",
+        "Clicking “Yes” dismisses the intro overlay and reveals the existing wishing page content."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "operation": "create",
+          "description": "Create a full-screen modal-style overlay component that renders the exact prompt text “Will you be my Valentine?” and “Yes”/“No” buttons, and exposes an onAccept handler that dismisses the overlay when “Yes” is clicked. Use shadcn-ui patterns for accessible button styling where appropriate (without editing frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "operation": "create",
+          "description": "Create a presentational component that renders a full-screen rose petal animation layer (CSS/emoji-based, no backend-served images) suitable for use inside the intro overlay, with a reduced-motion aware rendering mode. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the intro overlay into the existing Valentine wishing page so that, on initial load, the overlay is shown and the existing content is gated behind it; clicking “Yes” reveals the existing content without requiring persistence across reloads."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add CSS keyframes/utilities to support the rose petal full-screen animation layer (petals across the screen), and ensure the styles respect prefers-reduced-motion for animation reduction."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Make the “No” button playfully evade clicks while staying within the viewport and supporting reduced-motion accessibility.",
+      "acceptanceCriteria": [
+        "Attempting to click/tap the “No” button causes it to reposition away from the pointer/finger before the click is registered, preventing a successful “No” click.",
+        "The evasive behavior stays within the viewport (button never becomes unreachable off-screen).",
+        "When `prefers-reduced-motion: reduce` is enabled, the rose petal animation and the evasive motion are disabled or significantly reduced, and the UI remains usable."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "operation": "modify",
+          "description": "Implement evasive “No” button behavior using pointer/touch event handling that moves the button before click registration; clamp the button position so it remains reachable within the viewport; and disable or significantly reduce the evasive motion when prefers-reduced-motion is enabled. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "operation": "modify",
+          "description": "Ensure the rose petal animation layer is disabled or significantly reduced when prefers-reduced-motion is enabled (to satisfy reduced-motion requirements alongside the evasive button behavior). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/adjust CSS classes supporting the evasive button positioning/transition (and reduced-motion overrides) so movement can be smooth by default but minimized under prefers-reduced-motion."
+        }
+      ]
+    }
+  ]
+}

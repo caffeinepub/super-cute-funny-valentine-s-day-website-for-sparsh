@@ -1,0 +1,75 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-12T07:30:50.792Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-7",
+        "summary": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/valentine/RotatingOneLiners.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/valentine/RotatingOneLiners.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+          "frontend/src/components/valentine/RosePetalOverlay.tsx",
+          "frontend/src/index.css"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/valentine/RosePetalOverlay.tsx",
+    "frontend/src/components/valentine/RotatingOneLiners.tsx",
+    "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+    "frontend/src/index.css",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

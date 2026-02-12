@@ -1,0 +1,11 @@
+{
+  "frontend/src/App.tsx": "Main Valentine's Day single-page application with intro overlay gate, personalized greeting for Sparsh, hero section, rotating one-liners, surprise reveal, fun facts cards, and final heartfelt message using \"I like you\" copy throughout.",
+  "frontend/src/components/valentine/SurpriseReveal.tsx": "Interactive surprise component with a gift button that reveals a Valentine's coupon book containing cute date ideas and promises when clicked.",
+  "frontend/src/components/valentine/RotatingOneLiners.tsx": "Animated component that cycles through cute and funny one-liner messages every 3 seconds with pause-on-hover, reduced-motion support, and updated copy using \"I like you\" instead of \"I love you\".",
+  "frontend/src/components/valentine/FloatingHearts.tsx": "Decorative background animation component that generates floating heart emojis with randomized positions, delays, and durations, respecting reduced-motion preferences.",
+  "frontend/src/index.css": "Complete Valentine's Day theme stylesheet with warm pink/red/cream OKLCH color palette, custom animations (floating hearts, rose petals falling, bouncing, fading), valentine-specific utility classes, and full accessibility support including focus states and reduced-motion handling.",
+  "frontend/tailwind.config.js": "Extended Tailwind configuration with Valentine color tokens, custom Poppins/Inter font stack, and keyframe animations for floating hearts, bouncing, spinning, and fading effects.",
+  "frontend/index.html": "HTML entry point with updated Valentine's Day title, meta description, and Google Fonts preload for Inter and Poppins font families.",
+  "frontend/src/components/valentine/ValentineIntroOverlay.tsx": "Full-screen modal overlay with rose petal animation and \"Will you be my Valentine?\" prompt featuring a Yes button that proceeds to main content and a playful No button that evades pointer/touch interactions while staying within viewport bounds, with reduced-motion accessibility support.",
+  "frontend/src/components/valentine/RosePetalOverlay.tsx": "Decorative full-screen rose petal animation component with 30 falling petals featuring randomized positions, delays, durations, rotations, and drift patterns, respecting reduced-motion preferences by showing static petals instead."
+}

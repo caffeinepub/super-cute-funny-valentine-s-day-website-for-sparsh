@@ -1,0 +1,19 @@
+{
+  "backend/main.mo": "Minimal Motoko actor with no methods or logic.",
+  "feature_evidence.json": "Feature evidence report mapping three Valentine-related features to affected frontend files and components.",
+  "frontend-file-summaries.txt": "Prewritten summaries describing the purpose and behavior of each frontend file in the Valentine's app.",
+  "frontend/index.css": "Tailwind-driven global stylesheet defining Valentine-themed color tokens, dark mode values, and base styling.",
+  "frontend/index.html": "HTML entry point loading fonts and mounting the React Valentine app.",
+  "frontend/src/App.tsx": "Main React component coordinating the intro overlay, hero section, animations, one‑liners, and surprise reveal.",
+  "frontend/src/components/valentine/FloatingHearts.tsx": "Generates floating heart emoji animations with reduced‑motion handling.",
+  "frontend/src/components/valentine/RosePetalOverlay.tsx": "Creates animated falling rose petals with randomized motion and a static fallback for reduced‑motion users.",
+  "frontend/src/components/valentine/RotatingOneLiners.tsx": "Cycles through playful Valentine one‑liners with pause‑on‑hover and accessibility support.",
+  "frontend/src/components/valentine/SurpriseReveal.tsx": "Handles a clickable gift animation that reveals a Valentine coupon book with fun redeemable items.",
+  "frontend/src/components/valentine/ValentineIntroOverlay.tsx": "Interactive Valentine intro overlay with a moving 'No' button and an accept callback, using motion preferences and touch/mouse tracking.",
+  "frontend/src/hooks/useActor.ts": "React hook that creates and manages an authenticated or anonymous backend actor and refreshes dependent queries when identity changes.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and provider managing Internet Identity auth state, login flow, and stored identities using Dfinity AuthClient.",
+  "frontend/src/index.css": "Tailwind base styles plus custom Valentine-themed color variables, typography, and component utility classes.",
+  "frontend/src/main.tsx": "Entrypoint that mounts the app with React Query and Internet Identity providers and loads global styles.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending colors, fonts, animations, and Valentine theme variables with plugin support.",
+  "project_state.json": "Project metadata describing features, requirements, and current state of the Valentine website."
+}

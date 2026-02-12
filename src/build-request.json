@@ -1,0 +1,87 @@
+{
+  "kind": "build_request",
+  "title": "Replace “I love you” with “I like you” and add rose-petal intro Valentine prompt (Yes/No with evasive No)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "when remove everywhere u have written i love you instead use i like you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The hero paragraph in App content no longer contains “I love you” and uses “I like you” instead.",
+        "The rotating one-liners list no longer contains “I love you” and uses “I like you” instead.",
+        "A search across the frontend source for the exact string “I love you” returns no user-facing occurrences (case-sensitive match)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "in the starting of before the wishing page i want you to add a pop up page of rose petals all over the screen and a question will you be my valentine's with two option yes or no for yes u bring him to the wishing page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On initial load, the intro overlay is shown instead of the wishing page content.",
+        "The intro overlay includes a full-screen rose petal animation (petals visible across the screen).",
+        "The intro overlay displays the exact question text: “Will you be my Valentine?”",
+        "There are two visible buttons labeled “Yes” and “No”.",
+        "Clicking “Yes” dismisses the intro overlay and reveals the existing wishing page content."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "for no make it playful such that he is not able to click the no button whenever he tries it runs away"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Attempting to click/tap the “No” button causes it to reposition away from the pointer/finger before the click is registered, preventing a successful “No” click.",
+        "The evasive behavior stays within the viewport (button never becomes unreachable off-screen).",
+        "When `prefers-reduced-motion: reduce` is enabled, the rose petal animation and the evasive motion are disabled or significantly reduced, and the UI remains usable."
+      ]
+    }
+  ],
+  "constraints": [
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not serve images from the backend; any static visuals must be front-end assets or purely CSS/emoji-based.",
+    "Keep all user-facing text in English."
+  ],
+  "nonGoals": [
+    "No backend changes (Motoko actor can remain empty).",
+    "No new authentication or Internet Identity changes.",
+    "No requirement to persist the intro choice across page reloads unless explicitly added later."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

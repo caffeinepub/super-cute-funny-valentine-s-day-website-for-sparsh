@@ -1,0 +1,349 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        
+        /* Valentine's Day Color Palette - Warm pinks, reds, and creams */
+        --background: 0.98 0.01 15;
+        --foreground: 0.25 0.02 15;
+        
+        --card: 1 0.005 15;
+        --card-foreground: 0.25 0.02 15;
+        
+        --popover: 1 0.005 15;
+        --popover-foreground: 0.25 0.02 15;
+        
+        /* Primary: Rich romantic red */
+        --primary: 0.55 0.22 15;
+        --primary-foreground: 0.98 0.01 15;
+        
+        /* Secondary: Soft cream */
+        --secondary: 0.96 0.015 45;
+        --secondary-foreground: 0.35 0.02 15;
+        
+        /* Muted: Light blush */
+        --muted: 0.94 0.02 15;
+        --muted-foreground: 0.50 0.03 15;
+        
+        /* Accent: Warm coral pink */
+        --accent: 0.75 0.15 25;
+        --accent-foreground: 0.25 0.02 15;
+        
+        --destructive: 0.55 0.25 25;
+        --destructive-foreground: 0.98 0.01 15;
+        
+        --border: 0.90 0.02 15;
+        --input: 0.90 0.02 15;
+        --ring: 0.55 0.22 15;
+        
+        /* Valentine-specific colors */
+        --valentine-primary: 0.55 0.22 15;
+        --valentine-secondary: 0.75 0.15 25;
+        --valentine-accent: 0.65 0.18 35;
+        --valentine-light: 0.96 0.015 15;
+        --valentine-dark: 0.30 0.03 15;
+        --valentine-muted: 0.50 0.03 15;
+    }
+
+    .dark {
+        --background: 0.20 0.02 15;
+        --foreground: 0.95 0.01 15;
+        
+        --card: 0.25 0.02 15;
+        --card-foreground: 0.95 0.01 15;
+        
+        --popover: 0.22 0.02 15;
+        --popover-foreground: 0.95 0.01 15;
+        
+        --primary: 0.70 0.18 15;
+        --primary-foreground: 0.20 0.02 15;
+        
+        --secondary: 0.30 0.02 15;
+        --secondary-foreground: 0.95 0.01 15;
+        
+        --muted: 0.28 0.02 15;
+        --muted-foreground: 0.65 0.02 15;
+        
+        --accent: 0.75 0.15 25;
+        --accent-foreground: 0.95 0.01 15;
+        
+        --destructive: 0.60 0.22 25;
+        --destructive-foreground: 0.95 0.01 15;
+        
+        --border: 0.35 0.02 15;
+        --input: 0.35 0.02 15;
+        --ring: 0.70 0.18 15;
+        
+        --valentine-primary: 0.70 0.18 15;
+        --valentine-secondary: 0.75 0.15 25;
+        --valentine-accent: 0.65 0.18 35;
+        --valentine-light: 0.30 0.02 15;
+        --valentine-dark: 0.90 0.01 15;
+        --valentine-muted: 0.65 0.02 15;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+}
+
+@layer components {
+    .valentine-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.15), 0 2px 8px rgba(220, 38, 38, 0.1);
+        border: 2px solid oklch(var(--valentine-light));
+        transition: all 0.3s ease;
+    }
+
+    .valentine-card:hover {
+        box-shadow: 0 8px 30px rgba(220, 38, 38, 0.2), 0 4px 12px rgba(220, 38, 38, 0.15);
+        transform: scale(1.02);
+    }
+
+    .valentine-badge {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(to right, oklch(var(--valentine-primary)), oklch(var(--valentine-accent)));
+        color: white;
+        border-radius: 9999px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.15), 0 2px 8px rgba(220, 38, 38, 0.1);
+    }
+
+    @media (min-width: 768px) {
+        .valentine-badge {
+            font-size: 1rem;
+        }
+    }
+
+    .coupon-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+        background-color: rgba(244, 224, 224, 0.5);
+        border-radius: 1rem;
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        transition: all 0.2s ease;
+    }
+
+    .coupon-item:hover {
+        background-color: oklch(var(--valentine-light));
+        border-color: rgba(220, 38, 38, 0.4);
+        transform: scale(1.02);
+    }
+
+    .coupon-emoji {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .coupon-text {
+        color: oklch(var(--valentine-dark));
+        font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+        .coupon-text {
+            font-size: 1rem;
+        }
+    }
+
+    .pattern-bg {
+        background-image: url('/assets/generated/valentine-pattern-tile.dim_512x512.png');
+        background-repeat: repeat;
+        background-size: 256px 256px;
+    }
+}
+
+@layer utilities {
+    .shadow-valentine {
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.15), 0 2px 8px rgba(220, 38, 38, 0.1);
+    }
+
+    .shadow-valentine-lg {
+        box-shadow: 0 8px 30px rgba(220, 38, 38, 0.2), 0 4px 12px rgba(220, 38, 38, 0.15);
+    }
+
+    .text-valentine-primary {
+        color: oklch(var(--valentine-primary));
+    }
+
+    .text-valentine-secondary {
+        color: oklch(var(--valentine-secondary));
+    }
+
+    .text-valentine-accent {
+        color: oklch(var(--valentine-accent));
+    }
+
+    .text-valentine-dark {
+        color: oklch(var(--valentine-dark));
+    }
+
+    .text-valentine-muted {
+        color: oklch(var(--valentine-muted));
+    }
+
+    .bg-valentine-primary {
+        background-color: oklch(var(--valentine-primary));
+    }
+
+    .bg-valentine-light {
+        background-color: oklch(var(--valentine-light));
+    }
+
+    .border-valentine-primary {
+        border-color: oklch(var(--valentine-primary));
+    }
+
+    .border-valentine-light {
+        border-color: oklch(var(--valentine-light));
+    }
+
+    /* Animations */
+    @keyframes float-up {
+        0% {
+            transform: translateY(100vh) scale(0);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) scale(1);
+            opacity: 0;
+        }
+    }
+
+    @keyframes petal-fall {
+        0% {
+            transform: translateY(-100vh) translateX(0) rotate(var(--rotation, 0deg));
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) translateX(var(--drift, 0px)) rotate(calc(var(--rotation, 0deg) + 360deg));
+            opacity: 0;
+        }
+    }
+
+    @keyframes bounce-slow {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes arrow-float {
+        0%, 100% {
+            transform: translateY(0) rotate(-5deg);
+        }
+        50% {
+            transform: translateY(-15px) rotate(5deg);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .floating-heart {
+        position: absolute;
+        bottom: -50px;
+        animation: float-up linear infinite;
+        font-size: 1.5rem;
+        filter: drop-shadow(0 2px 4px rgba(220, 38, 38, 0.3));
+    }
+
+    .rose-petal {
+        position: absolute;
+        top: -50px;
+        animation: petal-fall linear infinite;
+        font-size: 1.5rem;
+        filter: drop-shadow(0 2px 4px rgba(220, 38, 38, 0.3));
+        opacity: 0.8;
+    }
+
+    .animate-bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+
+    .arrow-float {
+        animation: arrow-float 4s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out;
+    }
+
+    /* Focus styles for accessibility */
+    *:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.3);
+        outline-offset: 2px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .floating-heart,
+        .rose-petal {
+            display: none;
+        }
+    }
+}
