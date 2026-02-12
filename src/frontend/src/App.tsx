@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SurpriseReveal from './components/valentine/SurpriseReveal';
 import RotatingOneLiners from './components/valentine/RotatingOneLiners';
 import FloatingHearts from './components/valentine/FloatingHearts';
 import ValentineIntroOverlay from './components/valentine/ValentineIntroOverlay';
+import ValentineBackgroundMusic from './components/valentine/ValentineBackgroundMusic';
 import { Heart } from 'lucide-react';
+import { getAssetUrl } from './utils/assetBase';
+import { initDeployDiagnostics } from './deployDiagnostics';
 
 function App() {
   const [showSurprise, setShowSurprise] = useState(false);
   const [hasAcceptedValentine, setHasAcceptedValentine] = useState(false);
   const currentYear = new Date().getFullYear();
+
+  // Initialize deployment diagnostics once on app startup
+  useEffect(() => {
+    initDeployDiagnostics();
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -21,6 +29,9 @@ function App() {
       {!hasAcceptedValentine && (
         <ValentineIntroOverlay onAccept={() => setHasAcceptedValentine(true)} />
       )}
+
+      {/* Background Music (active after intro overlay is accepted) */}
+      <ValentineBackgroundMusic isActive={hasAcceptedValentine} />
 
       <div className="relative z-10">
         {/* Header */}
@@ -38,12 +49,12 @@ function App() {
           <section className="text-center mb-12 md:mb-20">
             <div className="relative inline-block mb-8">
               <img
-                src="/assets/generated/valentine-mascot.dim_1024x1024.png"
+                src={getAssetUrl('generated/valentine-mascot.dim_1024x1024.png')}
                 alt="Cute Valentine mascot"
                 className="w-32 h-32 md:w-48 md:h-48 mx-auto animate-bounce-slow"
               />
               <img
-                src="/assets/generated/heart-doodles.dim_1024x1024.png"
+                src={getAssetUrl('generated/heart-doodles.dim_1024x1024.png')}
                 alt="Heart doodles decoration"
                 className="absolute -top-4 -right-4 w-24 h-24 md:w-32 md:h-32 opacity-80 animate-spin-slow"
               />
@@ -71,7 +82,7 @@ function App() {
           {/* Cupid Arrow Divider */}
           <div className="flex justify-center mb-12 md:mb-16">
             <img
-              src="/assets/generated/cupid-arrow.dim_1024x1024.png"
+              src={getAssetUrl('generated/cupid-arrow.dim_1024x1024.png')}
               alt="Cupid's arrow"
               className="w-48 md:w-64 opacity-90 arrow-float"
             />
@@ -90,7 +101,7 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold text-center text-valentine-dark mb-8">
               Why You're the Best 🌟
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <div className="valentine-card p-6 text-center">
                 <div className="text-4xl mb-3">😂</div>
                 <h3 className="font-semibold text-valentine-dark mb-2">You Make Me Laugh</h3>
@@ -102,14 +113,7 @@ function App() {
                 <div className="text-4xl mb-3">🍕</div>
                 <h3 className="font-semibold text-valentine-dark mb-2">Perfect Pizza Partner</h3>
                 <p className="text-sm text-valentine-muted">
-                  You never judge my topping choices (much appreciated)
-                </p>
-              </div>
-              <div className="valentine-card p-6 text-center">
-                <div className="text-4xl mb-3">🎮</div>
-                <h3 className="font-semibold text-valentine-dark mb-2">Best Teammate</h3>
-                <p className="text-sm text-valentine-muted">
-                  In games and in life (but mostly in games)
+                  You never judge my topping choices (much appreciated). You buy me jar cakes always (so sweet of you)
                 </p>
               </div>
             </div>

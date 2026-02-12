@@ -1,69 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Valentine intro overlay audio + hero text update + clean full-screen overlay visuals",
+  "title": "Add provided MP3 as a static frontend asset for background music",
   "requirements": [
     {
-      "id": "REQ-10",
-      "summary": "Add interaction-gated ambient and confirmation sound effects to the Valentine intro overlay with a visible mute/unmute control defaulting to muted.",
+      "id": "REQ-26",
+      "summary": "Place the user-provided i-wanna-be-yours.mp3 into the expected frontend public assets path so existing getAssetUrl-based background music loading works at runtime.",
       "acceptanceCriteria": [
-        "When the intro overlay first appears, no audio plays automatically before any user interaction.",
-        "After a user interaction (e.g., tap/click on the overlay), ambient romantic audio can play while the intro overlay remains visible.",
-        "Clicking “Yes! 💖” plays a short romantic confirmation sound effect exactly once and then proceeds to the main page as before.",
-        "A clear mute/unmute control is present on the intro overlay; when muted, no sounds play.",
-        "Audio/sound effects do not block navigation and do not interfere with reduced-motion behavior."
+        "A file exists at frontend/public/assets/audio/i-wanna-be-yours.mp3 in the codebase.",
+        "The deployed site successfully requests and loads the MP3 from the correct SPA base path (i.e., via the existing getAssetUrl('audio/i-wanna-be-yours.mp3') behavior) without a 404.",
+        "After the user accepts the intro overlay and unmutes background music, the track plays and loops; when the user mutes it stops/pause as expected."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/audio/valentine-ambient.mp3",
+          "path": "frontend/public/assets/audio/i-wanna-be-yours.mp3",
           "operation": "create",
-          "description": "Add a subtle ambient romantic background audio file to be used while the intro overlay is visible (played only after user interaction unlocks audio)."
-        },
-        {
-          "path": "frontend/public/assets/audio/valentine-confirm.mp3",
-          "operation": "create",
-          "description": "Add a short romantic confirmation sound effect to be played exactly once when the user clicks “Yes! 💖” (played only after user interaction unlocks audio)."
-        },
-        {
-          "path": "frontend/src/components/valentine/useIntroOverlayAudio.ts",
-          "operation": "create",
-          "description": "Create a small React hook to manage intro-overlay audio state (muted by default, unlock-on-first-interaction, ambient play/pause tied to overlay visibility, and one-shot confirmation playback with safe play() error handling to comply with autoplay rules)."
-        },
-        {
-          "path": "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-          "operation": "modify",
-          "description": "Wire ambient + confirmation audio into the overlay: keep audio muted until a user gesture occurs, provide a visible mute/unmute toggle (aria-pressed), start/stop ambient while the overlay is shown, and trigger the confirmation sound on “Yes! 💖” without blocking the existing onAccept navigation. Use the shadcn-ui Button component for the toggle/controls where appropriate; Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "summary": "Replace the hero sub-line text with the exact requested sentence and ensure the old line is removed.",
-      "acceptanceCriteria": [
-        "The old “hitting snooze on Monday mornings” line no longer appears anywhere on the site.",
-        "The hero sub-line appears exactly as: “I like you more than Hange liked titans.”"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Update the hero sub-line text to exactly: “I like you more than Hange liked titans.” and remove the previous “hitting snooze on Monday mornings” line."
-        }
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "summary": "Remove background blur from the Valentine intro overlay and make it a clean full-screen single-screen overlay with a solid/clean backdrop while keeping rose petals and accessible dialog semantics.",
-      "acceptanceCriteria": [
-        "The intro overlay no longer applies a backdrop blur effect to the content behind it.",
-        "The intro overlay reads as a clean full-screen experience (solid/clean background) with the rose petal animation still visible.",
-        "The overlay remains responsive on mobile and desktop and retains accessible dialog semantics (role/aria attributes still valid)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-          "operation": "modify",
-          "description": "Remove the backdrop-blur styling and any translucent/blurred-layer feel by switching to a solid/clean full-screen backdrop (while preserving rose petal overlay visibility and maintaining role='dialog', aria-modal, and aria-labelledby). Ensure layout remains responsive and the existing Yes/No interaction design is unchanged aside from the visual cleanup. Use the shadcn-ui Button component consistently for overlay actions if adjustments are needed; Verify the component's usage instructions before implementing."
+          "description": "Add the attached MP3 file to this exact static asset location so the existing ValentineBackgroundMusic code (new Audio(getAssetUrl('audio/i-wanna-be-yours.mp3'))) can load it under Vite BASE_URL without changing any UX or hardcoding root-relative paths."
         }
       ]
     }

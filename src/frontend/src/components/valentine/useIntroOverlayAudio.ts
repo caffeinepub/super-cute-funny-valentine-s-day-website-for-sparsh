@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { getAssetUrl } from '../../utils/assetBase';
 
 export function useIntroOverlayAudio() {
   const [isMuted, setIsMuted] = useState(true);
@@ -7,9 +8,9 @@ export function useIntroOverlayAudio() {
   const confirmAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize audio elements
-    ambientAudioRef.current = new Audio('/assets/audio/valentine-ambient.mp3');
-    confirmAudioRef.current = new Audio('/assets/audio/valentine-confirm.mp3');
+    // Initialize audio elements with BASE_URL-safe paths
+    ambientAudioRef.current = new Audio(getAssetUrl('audio/valentine-ambient.mp3'));
+    confirmAudioRef.current = new Audio(getAssetUrl('audio/valentine-confirm.mp3'));
 
     if (ambientAudioRef.current) {
       ambientAudioRef.current.loop = true;

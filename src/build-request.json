@@ -1,86 +1,36 @@
 {
   "kind": "build_request",
-  "title": "Add romantic sound effects, update one-liner text, and fix intro overlay blur/layout",
+  "title": "Include the provided i-wanna-be-yours.mp3 file in the frontend assets for background music",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-10",
-      "text": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
+      "id": "REQ-26",
+      "text": "Add the user-provided MP3 file to the repository so the existing background-music code can load it at runtime. Specifically, include the attached audio file as a static frontend asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 (matching the current reference getAssetUrl('audio/i-wanna-be-yours.mp3')).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages-4"
+          "recent-messages-5"
         ],
         "quotes": [
-          "yes do add some romantic sound effects"
+          "i see that u have added assets/i-wanna-be-yours.mp3 but i dont see this file uploaded anywhere kindly put this file into the code which im attaching for bg music"
         ]
       },
       "acceptanceCriteria": [
-        "When the intro overlay first appears, no audio plays automatically before any user interaction.",
-        "After a user interaction (e.g., tap/click on the overlay), ambient romantic audio can play while the intro overlay remains visible.",
-        "Clicking “Yes! 💖” plays a short romantic confirmation sound effect exactly once and then proceeds to the main page as before.",
-        "A clear mute/unmute control is present on the intro overlay; when muted, no sounds play.",
-        "Audio/sound effects do not block navigation and do not interfere with reduced-motion behavior."
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "recent-messages-4"
-        ],
-        "quotes": [
-          "add one line instead of hitting snooze on monday line replace with I like you more than Hange liked titans."
-        ]
-      },
-      "acceptanceCriteria": [
-        "The old “hitting snooze on Monday mornings” line no longer appears anywhere on the site.",
-        "The hero sub-line appears exactly as: “I like you more than Hange liked titans.”"
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "text": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "recent-messages-4"
-        ],
-        "quotes": [
-          "Also the screen with the question will u be my valentine pls remove the blur effect from the back and amke it complete single screen it looks weird"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The intro overlay no longer applies a backdrop blur effect to the content behind it.",
-        "The intro overlay reads as a clean full-screen experience (solid/clean background) with the rose petal animation still visible.",
-        "The overlay remains responsive on mobile and desktop and retains accessible dialog semantics (role/aria attributes still valid)."
+        "A file exists at frontend/public/assets/audio/i-wanna-be-yours.mp3 in the codebase.",
+        "The deployed site successfully requests and loads the MP3 from the correct SPA base path (i.e., via the existing getAssetUrl('audio/i-wanna-be-yours.mp3') behavior) without a 404.",
+        "After the user accepts the intro overlay and unmutes background music, the track plays and loops; when the user mutes it stops/pause as expected."
       ]
     }
   ],
   "constraints": [
-    "Frontend files under frontend/src/components/ui and the hooks listed in frontend.immutablePaths must not be edited.",
-    "Do not add or require any backend changes (backend/main.mo should remain without new logic unless strictly necessary).",
-    "All user-facing text must remain in English."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not hardcode root-relative asset paths (e.g., '/assets/...'); keep BASE_URL-safe asset loading via getAssetUrl."
   ],
   "nonGoals": [
-    "Adding new backend persistence or user profiles for audio settings.",
-    "Adding third-party audio streaming/integrations.",
-    "Changing the existing intro overlay Yes/No interaction design beyond removing blur and improving the full-screen feel."
+    "Do not change the background-music UX/controls, autoplay-gating logic, or stop-on-exit behavior beyond what is required to ensure the MP3 file is actually present and loadable."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -7,7 +7,7 @@ const oneLiners = [
   "Netflix asked if we're still watching... always! 🎬",
   "You're my favorite weirdo 🤪",
   "I'd share my fries with you 🍟",
-  "You're better than coffee (almost) ☕",
+  "You're better than chai (almost) ☕",
   "My heart does the thing when I see you 💓"
 ];
 

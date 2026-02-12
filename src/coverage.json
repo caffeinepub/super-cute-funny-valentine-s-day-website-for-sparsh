@@ -1,52 +1,24 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T07:39:06.212Z",
+  "generatedAt": "2026-02-12T10:35:50.368Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
+        "id": "REQ-26",
+        "summary": "Add the user-provided MP3 file to the repository so the existing background-music code can load it at runtime. Specifically, include the attached audio file as a static frontend asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 (matching the current reference getAssetUrl('audio/i-wanna-be-yours.mp3')).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/audio/valentine-ambient.mp3",
-          "frontend/public/assets/audio/valentine-confirm.mp3",
-          "frontend/src/components/valentine/useIntroOverlayAudio.ts",
-          "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
+          "frontend/public/assets/audio/i-wanna-be-yours.mp3"
         ],
         "matchedFiles": [
-          "frontend/public/assets/audio/valentine-ambient.mp3",
-          "frontend/public/assets/audio/valentine-confirm.mp3",
-          "frontend/src/components/valentine/useIntroOverlayAudio.ts",
-          "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
-        ]
-      },
-      {
-        "id": "REQ-11",
-        "summary": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-12",
-        "summary": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
+          "frontend/public/assets/audio/i-wanna-be-yours.mp3"
         ]
       }
     ]
@@ -56,11 +28,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/audio/valentine-ambient.mp3",
-    "frontend/public/assets/audio/valentine-confirm.mp3",
-    "frontend/src/App.tsx",
-    "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-    "frontend/src/components/valentine/useIntroOverlayAudio.ts",
+    "frontend/public/assets/audio/i-wanna-be-yours.mp3",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

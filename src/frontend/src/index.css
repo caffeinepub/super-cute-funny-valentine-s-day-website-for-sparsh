@@ -167,9 +167,13 @@
     }
 
     .pattern-bg {
-        background-image: url('/assets/generated/valentine-pattern-tile.dim_512x512.png');
+        background-image: var(--pattern-bg-url);
         background-repeat: repeat;
         background-size: 256px 256px;
+    }
+
+    :root {
+        --pattern-bg-url: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="512" height="512" fill="%23fef2f2"/></svg>');
     }
 }
 

@@ -2,12 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-romantic-sound-effects-to-the-valentine-intro-experience-the-rose-petal-will-you-be-my-valentine-overlay-in-a-way-that-works-with-browser-autoplay-rules-i-e-sound-plays-only-after-a-user-interaction-include-at-least-1-a-subtle-ambient-romantic-background-audio-while-the-intro-overlay-is-visible-and-2-a-short-confirmation-sound-when-the-user-clicks-yes-provide-a-simple-visible-mute-unmute-control-on-the-intro-overlay-and-default-to-muted-until-the-first-user-interaction-enables-audio",
-      "featureTitle": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
-      "files": [
-        "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-        "frontend/src/components/valentine/useIntroOverlayAudio.ts"
-      ],
+      "featureId": "feature-add-the-user-provided-mp3-file-to-the-repository-so-the-existing-background-music-code-can-load-it-at-runtime-specifically-include-the-attached-audio-file-as-a-static-frontend-asset-at-frontend-public-assets-audio-i-wanna-be-yours-mp3-matching-the-current-reference-getasseturl-audio-i-wanna-be-yours-mp3",
+      "featureTitle": "Add the user-provided MP3 file to the repository so the existing background-music code can load it at runtime. Specifically, include the attached audio file as a static frontend asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 (matching the current reference getAssetUrl('audio/i-wanna-be-yours.mp3')).",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -16,43 +13,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-10"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-replace-the-hero-sub-line-i-like-you-more-than-i-like-hitting-snooze-on-monday-mornings-and-that-s-saying-a-lot-with-the-exact-text-i-like-you-more-than-hange-liked-titans",
-      "featureTitle": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
-      "files": [
-        "frontend/src/App.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-11"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-will-you-be-my-valentine-intro-overlay-visuals-to-remove-any-background-blur-and-make-it-feel-like-a-clean-full-screen-single-screen-overlay-not-a-weird-blurred-layer-over-the-page-specifically-remove-the-blur-effect-behind-the-overlay-and-ensure-the-overlay-has-a-solid-clean-full-screen-backdrop-so-the-underlying-page-is-not-visually-competing",
-      "featureTitle": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
-      "files": [
-        "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-12"
+        "REQ-26"
       ],
       "confidence": "high"
     }
