@@ -1,21 +1,27 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add provided MP3 as a static frontend asset for background music",
+  "title": "Ship bundled background music MP3 as static asset for production-safe playback",
   "requirements": [
     {
-      "id": "REQ-26",
-      "summary": "Place the user-provided i-wanna-be-yours.mp3 into the expected frontend public assets path so existing getAssetUrl-based background music loading works at runtime.",
+      "id": "REQ-28",
+      "summary": "Commit the provided MP3 into frontend/public so existing getAssetUrl('audio/i-wanna-be-yours.mp3') background-music code can load it in production without hotlinking.",
       "acceptanceCriteria": [
-        "A file exists at frontend/public/assets/audio/i-wanna-be-yours.mp3 in the codebase.",
-        "The deployed site successfully requests and loads the MP3 from the correct SPA base path (i.e., via the existing getAssetUrl('audio/i-wanna-be-yours.mp3') behavior) without a 404.",
-        "After the user accepts the intro overlay and unmutes background music, the track plays and loops; when the user mutes it stops/pause as expected."
+        "The file frontend/public/assets/audio/i-wanna-be-yours.mp3 exists in the repo and is included in the production build output under the correct base path.",
+        "In a production deployment, after the user has accepted the intro overlay and performs a user interaction to unmute, background music plays audibly and loops (no 404s for the MP3 in the browser Network tab).",
+        "The app does not attempt to load background music from the external URL at runtime; it loads only via getAssetUrl('audio/i-wanna-be-yours.mp3').",
+        "When navigating away/closing the tab/unmounting the app, the background music stops (no continuing audio playback)."
       ],
       "file_operations": [
         {
           "path": "frontend/public/assets/audio/i-wanna-be-yours.mp3",
           "operation": "create",
-          "description": "Add the attached MP3 file to this exact static asset location so the existing ValentineBackgroundMusic code (new Audio(getAssetUrl('audio/i-wanna-be-yours.mp3'))) can load it under Vite BASE_URL without changing any UX or hardcoding root-relative paths."
+          "description": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it at this exact path so getAssetUrl('audio/i-wanna-be-yours.mp3') resolves base-path safely in production and does not rely on the external URL at runtime."
+        },
+        {
+          "path": "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "operation": "modify",
+          "description": "Verify background music continues to load exclusively via getAssetUrl('audio/i-wanna-be-yours.mp3') (no external URL fallback) and that teardown reliably stops audio on unmount/pagehide/beforeunload to prevent continued playback."
         }
       ]
     }

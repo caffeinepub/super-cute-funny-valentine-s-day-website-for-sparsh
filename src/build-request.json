@@ -1,36 +1,51 @@
 {
   "kind": "build_request",
-  "title": "Include the provided i-wanna-be-yours.mp3 file in the frontend assets for background music",
+  "title": "Import provided MP3 into app so background music plays",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-26",
-      "text": "Add the user-provided MP3 file to the repository so the existing background-music code can load it at runtime. Specifically, include the attached audio file as a static frontend asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 (matching the current reference getAssetUrl('audio/i-wanna-be-yours.mp3')).",
+      "id": "REQ-28",
+      "text": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it into the repository as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so the existing background-music code (getAssetUrl('audio/i-wanna-be-yours.mp3')) can load it in production without relying on the external URL at runtime.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages-5"
+          "msg-4",
+          "msg-6"
         ],
         "quotes": [
-          "i see that u have added assets/i-wanna-be-yours.mp3 but i dont see this file uploaded anywhere kindly put this file into the code which im attaching for bg music"
+          "bro are u really adding in the music this link: https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 cuz i dont hear anything at all",
+          "yes add it"
         ]
       },
       "acceptanceCriteria": [
-        "A file exists at frontend/public/assets/audio/i-wanna-be-yours.mp3 in the codebase.",
-        "The deployed site successfully requests and loads the MP3 from the correct SPA base path (i.e., via the existing getAssetUrl('audio/i-wanna-be-yours.mp3') behavior) without a 404.",
-        "After the user accepts the intro overlay and unmutes background music, the track plays and loops; when the user mutes it stops/pause as expected."
+        "The file frontend/public/assets/audio/i-wanna-be-yours.mp3 exists in the repo and is included in the production build output under the correct base path.",
+        "In a production deployment, after the user has accepted the intro overlay and performs a user interaction to unmute, background music plays audibly and loops (no 404s for the MP3 in the browser Network tab).",
+        "The app does not attempt to load background music from the external URL at runtime; it loads only via getAssetUrl('audio/i-wanna-be-yours.mp3').",
+        "When navigating away/closing the tab/unmounting the app, the background music stops (no continuing audio playback)."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Do not hardcode root-relative asset paths (e.g., '/assets/...'); keep BASE_URL-safe asset loading via getAssetUrl."
+    "Frontend files listed as immutable by the system must not be edited (compose instead).",
+    "Do not hotlink the MP3 at runtime; ship it as a static asset in frontend/public/assets/audio/.",
+    "Keep asset loading SPA base-path safe by continuing to use getAssetUrl(...) for audio file paths."
   ],
   "nonGoals": [
-    "Do not change the background-music UX/controls, autoplay-gating logic, or stop-on-exit behavior beyond what is required to ensure the MP3 file is actually present and loadable."
+    "Changing the existing background-music UX/controls or autoplay/unmute behavior beyond what is necessary to make the audio file actually present and loadable.",
+    "Adding any backend storage or serving for audio files."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

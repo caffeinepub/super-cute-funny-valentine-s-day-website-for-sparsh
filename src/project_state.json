@@ -1,12 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 33,
+  "projectStateVersion": 37,
   "summary": "Single-page cute/funny Valentine’s website for Sparsh, now with an intro pop-up Valentine question screen before the main wishing page.",
   "architectural_notes": [
     "If adding background music outside the intro overlay, ensure it respects browser autoplay rules (start only after user interaction) and provide a visible mute/unmute control.",
     "When adding external links (e.g., YouTube Music), use accessible link/button text and safe target/rel attributes (e.g., target=_blank with rel=\"noopener noreferrer\" if opening a new tab).",
     "If using user-provided background music (.mp3), load it as a static frontend asset (respect SPA base path), loop playback while the page is active, and stop/pause audio on page hide/unload/navigation; still comply with autoplay rules and keep a visible mute/unmute control.",
-    "Ensure any referenced background-music .mp3 asset is actually committed/included in the frontend static assets (not just referenced by path), so production builds contain the file."
+    "Ensure any referenced background-music .mp3 asset is actually committed/included in the frontend static assets (not just referenced by path), so production builds contain the file.",
+    "If user provides an external MP3 URL, download/commit it as a static frontend asset (don’t hotlink) to avoid runtime failures/CORS and ensure it ships in production builds."
   ],
   "known_issues": [
     "Build/deployment repeatedly fails with an internal configuration error; may be related to current config/features (user suspects music feature).",
@@ -312,6 +313,28 @@
       "id": "AR-16",
       "summary": "Allow user-provided .mp3 file as the site background music (loop while on site; stop when user leaves)",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Update the site background music to use the alternate MP3 provided via URL (extract/download and include it as the background track)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Update the main Valentine page background music track to use the MP3 provided at https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 by downloading/extracting it at build time and committing it into the app as a static asset so production does not depend on that external URL at runtime. Keep the current background-music implementation behavior: it must still load via getAssetUrl(...) (SPA base-path safe), start only after a user interaction (autoplay-rule compliant), default to muted until interaction, loop while the user is on the main page, and fully stop on pagehide/unload/app unmount.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it into the repository as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so the existing background-music code (getAssetUrl('audio/i-wanna-be-yours.mp3')) can load it in production without relying on the external URL at runtime.",
+      "reqIds": [
+        "REQ-28"
+      ],
       "status": "pending"
     }
   ],
