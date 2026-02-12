@@ -61,7 +61,7 @@ function App() {
                 Basically, you're essential to my survival! 🥜📱
               </p>
               <p className="text-base md:text-lg text-valentine-muted/80">
-                I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).
+                I like you more than Hange liked titans.
               </p>
             </div>
 

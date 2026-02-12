@@ -1,12 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Update Valentine page copy to say “I like you” and add a playful intro Valentine prompt with rose petals before the main wishing content.
+**Goal:** Improve the Valentine intro overlay experience by adding user-initiated romantic audio, updating the hero one-liner text, and making the intro overlay a clean full-screen view without background blur.
 
 **Planned changes:**
-- Replace all user-facing occurrences of the exact phrase “I love you” with “I like you” (including hero text and rotating one-liners).
-- Add an initial full-screen intro overlay with a rose-petal animation and the exact question text “Will you be my Valentine?” plus “Yes” and “No” buttons.
-- Make the “Yes” button dismiss the intro and reveal the existing wishing page content.
-- Make the “No” button evade clicks/taps by moving within the viewport, with reduced/disabled motion and animation when `prefers-reduced-motion: reduce` is enabled.
+- Add intro-overlay ambient romantic background audio that only starts after a user interaction, with audio defaulting to muted until interaction enables it.
+- Add a visible mute/unmute control on the intro overlay that prevents any sounds from playing when muted.
+- Play a short romantic confirmation sound exactly once when the user clicks “Yes! 💖”, then continue navigation to the main page as before.
+- Replace the hero sub-line text with: “I like you more than Hange liked titans.” and ensure the old line is removed everywhere.
+- Remove any backdrop blur behind the “Will you be my Valentine?” overlay and make it read as a solid/clean, full-screen overlay while keeping the rose petal animation and accessible dialog semantics.
 
-**User-visible outcome:** On page load, users see a rose-petal Valentine prompt with “Yes/No”; choosing “Yes” opens the existing wishing page, while “No” playfully dodges interaction.
+**User-visible outcome:** The intro overlay appears as a clean full-screen Valentine prompt (no blurred background), offers mute/unmute controls, plays romantic audio only after the user interacts, and plays a one-time confirmation sound on “Yes! 💖”. The homepage hero sub-line displays the updated Hange text.

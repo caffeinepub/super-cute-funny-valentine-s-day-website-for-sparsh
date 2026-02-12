@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { Volume2, VolumeX } from 'lucide-react';
 import RosePetalOverlay from './RosePetalOverlay';
+import { useIntroOverlayAudio } from './useIntroOverlayAudio';
 
 interface ValentineIntroOverlayProps {
   onAccept: () => void;
@@ -11,6 +13,8 @@ export default function ValentineIntroOverlay({ onAccept }: ValentineIntroOverla
   const [isNoButtonEvading, setIsNoButtonEvading] = useState(false);
   const noButtonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { isMuted, toggleMute, handleFirstInteraction, playConfirmSound } = useIntroOverlayAudio();
 
   const prefersReducedMotion = typeof window !== 'undefined' 
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
@@ -30,6 +34,8 @@ export default function ValentineIntroOverlay({ onAccept }: ValentineIntroOverla
   }, []);
 
   const moveNoButton = (event: React.MouseEvent | React.TouchEvent) => {
+    handleFirstInteraction();
+    
     if (prefersReducedMotion || !noButtonRef.current || !containerRef.current) {
       return;
     }
@@ -80,15 +86,43 @@ export default function ValentineIntroOverlay({ onAccept }: ValentineIntroOverla
     }
   };
 
+  const handleAccept = () => {
+    playConfirmSound();
+    // Small delay to let the sound start playing before transition
+    setTimeout(() => {
+      onAccept();
+    }, 100);
+  };
+
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-valentine-light/95 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-valentine-light"
       role="dialog"
       aria-modal="true"
       aria-labelledby="valentine-question"
+      onClick={handleFirstInteraction}
     >
       <RosePetalOverlay />
       
+      {/* Mute/Unmute Control */}
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleMute();
+        }}
+        variant="ghost"
+        size="icon"
+        className="absolute top-4 right-4 z-10 text-valentine-dark hover:text-valentine-primary hover:bg-valentine-primary/10"
+        aria-pressed={!isMuted}
+        aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+      >
+        {isMuted ? (
+          <VolumeX className="w-6 h-6" />
+        ) : (
+          <Volume2 className="w-6 h-6" />
+        )}
+      </Button>
+
       <div 
         ref={containerRef}
         className="relative w-full max-w-2xl mx-4 p-8 md:p-12"
@@ -109,7 +143,7 @@ export default function ValentineIntroOverlay({ onAccept }: ValentineIntroOverla
 
         <div className="relative h-32 flex items-center justify-center gap-6">
           <Button
-            onClick={onAccept}
+            onClick={handleAccept}
             size="lg"
             className="bg-valentine-primary hover:bg-valentine-accent text-white font-semibold text-lg px-8 py-6 rounded-full shadow-valentine hover:shadow-valentine-lg hover:scale-105 transition-all duration-300 animate-fade-in"
           >

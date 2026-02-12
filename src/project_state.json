@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 9,
   "summary": "Single-page cute/funny Valentine’s website for Sparsh, now with an intro pop-up Valentine question screen before the main wishing page.",
   "architectural_notes": [],
   "known_issues": [],
-  "isFixRequest": false,
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-single-page-valentine-s-day-website-experience-that-wishes-sparsh-a-happy-valentine-s-day-with-a-super-cute-and-funny-tone-including-a-prominent-headline-a-short-personalized-message-addressing-sparsh-and-playful-microcopy-throughout-all-user-facing-text-in-english",
@@ -77,6 +77,30 @@
         "REQ-9"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-romantic-sound-effects-to-the-valentine-intro-experience-the-rose-petal-will-you-be-my-valentine-overlay-in-a-way-that-works-with-browser-autoplay-rules-i-e-sound-plays-only-after-a-user-interaction-include-at-least-1-a-subtle-ambient-romantic-background-audio-while-the-intro-overlay-is-visible-and-2-a-short-confirmation-sound-when-the-user-clicks-yes-provide-a-simple-visible-mute-unmute-control-on-the-intro-overlay-and-default-to-muted-until-the-first-user-interaction-enables-audio",
+      "title": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-hero-sub-line-i-like-you-more-than-i-like-hitting-snooze-on-monday-mornings-and-that-s-saying-a-lot-with-the-exact-text-i-like-you-more-than-hange-liked-titans",
+      "title": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-will-you-be-my-valentine-intro-overlay-visuals-to-remove-any-background-blur-and-make-it-feel-like-a-clean-full-screen-single-screen-overlay-not-a-weird-blurred-layer-over-the-page-specifically-remove-the-blur-effect-behind-the-overlay-and-ensure-the-overlay-has-a-solid-clean-full-screen-backdrop-so-the-underlying-page-is-not-visually-competing",
+      "title": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -101,6 +125,24 @@
     {
       "id": "AR-4",
       "summary": "Add an intro pop-up screen with full-screen rose petal animation and a “Will you be my Valentine?” Yes/No choice (Yes proceeds; No button playfully evades clicks)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add romantic sound effects to the intro rose-petal Valentine question pop-up",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Replace the rotating one-liner 'instead of hitting snooze on monday' with 'I like you more than Hange liked titans.'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Remove the blur effect behind the 'Will you be my Valentine?' intro screen and make it a clean full-screen single-screen overlay",
       "reqIds": [],
       "status": "pending"
     }

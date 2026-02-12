@@ -2,11 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-every-instance-of-the-phrase-i-love-you-with-i-like-you-across-all-user-facing-copy-on-the-site-including-hero-copy-and-rotating-one-liners",
-      "featureTitle": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
+      "featureId": "feature-add-romantic-sound-effects-to-the-valentine-intro-experience-the-rose-petal-will-you-be-my-valentine-overlay-in-a-way-that-works-with-browser-autoplay-rules-i-e-sound-plays-only-after-a-user-interaction-include-at-least-1-a-subtle-ambient-romantic-background-audio-while-the-intro-overlay-is-visible-and-2-a-short-confirmation-sound-when-the-user-clicks-yes-provide-a-simple-visible-mute-unmute-control-on-the-intro-overlay-and-default-to-muted-until-the-first-user-interaction-enables-audio",
+      "featureTitle": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/valentine/RotatingOneLiners.tsx"
+        "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
+        "frontend/src/components/valentine/useIntroOverlayAudio.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,18 +16,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-7"
+        "REQ-10"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-an-intro-overlay-screen-that-appears-before-the-existing-valentine-wishing-page-content-showing-a-full-screen-rose-petal-animation-and-the-question-text-will-you-be-my-valentine-with-two-options-yes-and-no-clicking-yes-must-proceed-to-the-existing-wishing-page-content",
-      "featureTitle": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
+      "featureId": "feature-replace-the-hero-sub-line-i-like-you-more-than-i-like-hitting-snooze-on-monday-mornings-and-that-s-saying-a-lot-with-the-exact-text-i-like-you-more-than-hange-liked-titans",
+      "featureTitle": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/valentine/RosePetalOverlay.tsx",
-        "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-        "frontend/src/index.css"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -37,17 +34,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-8"
+        "REQ-11"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-make-the-intro-overlay-no-button-playfully-evade-interaction-when-the-user-tries-to-click-tap-it-it-moves-away-so-it-cannot-be-clicked-while-remaining-responsive-and-accessible-including-reduced-motion-support",
-      "featureTitle": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
+      "featureId": "feature-update-the-will-you-be-my-valentine-intro-overlay-visuals-to-remove-any-background-blur-and-make-it-feel-like-a-clean-full-screen-single-screen-overlay-not-a-weird-blurred-layer-over-the-page-specifically-remove-the-blur-effect-behind-the-overlay-and-ensure-the-overlay-has-a-solid-clean-full-screen-backdrop-so-the-underlying-page-is-not-visually-competing",
+      "featureTitle": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
       "files": [
-        "frontend/src/components/valentine/RosePetalOverlay.tsx",
-        "frontend/src/components/valentine/ValentineIntroOverlay.tsx",
-        "frontend/src/index.css"
+        "frontend/src/components/valentine/ValentineIntroOverlay.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -57,7 +52,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-9"
+        "REQ-12"
       ],
       "confidence": "high"
     }

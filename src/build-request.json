@@ -1,74 +1,73 @@
 {
   "kind": "build_request",
-  "title": "Replace “I love you” with “I like you” and add rose-petal intro Valentine prompt (Yes/No with evasive No)",
+  "title": "Add romantic sound effects, update one-liner text, and fix intro overlay blur/layout",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-7",
-      "text": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
+      "id": "REQ-10",
+      "text": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "recent-messages-4"
         ],
         "quotes": [
-          "when remove everywhere u have written i love you instead use i like you"
+          "yes do add some romantic sound effects"
         ]
       },
       "acceptanceCriteria": [
-        "The hero paragraph in App content no longer contains “I love you” and uses “I like you” instead.",
-        "The rotating one-liners list no longer contains “I love you” and uses “I like you” instead.",
-        "A search across the frontend source for the exact string “I love you” returns no user-facing occurrences (case-sensitive match)."
+        "When the intro overlay first appears, no audio plays automatically before any user interaction.",
+        "After a user interaction (e.g., tap/click on the overlay), ambient romantic audio can play while the intro overlay remains visible.",
+        "Clicking “Yes! 💖” plays a short romantic confirmation sound effect exactly once and then proceeds to the main page as before.",
+        "A clear mute/unmute control is present on the intro overlay; when muted, no sounds play.",
+        "Audio/sound effects do not block navigation and do not interfere with reduced-motion behavior."
       ]
     },
     {
-      "id": "REQ-8",
-      "text": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
+      "id": "REQ-11",
+      "text": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "recent-messages-4"
         ],
         "quotes": [
-          "in the starting of before the wishing page i want you to add a pop up page of rose petals all over the screen and a question will you be my valentine's with two option yes or no for yes u bring him to the wishing page"
+          "add one line instead of hitting snooze on monday line replace with I like you more than Hange liked titans."
         ]
       },
       "acceptanceCriteria": [
-        "On initial load, the intro overlay is shown instead of the wishing page content.",
-        "The intro overlay includes a full-screen rose petal animation (petals visible across the screen).",
-        "The intro overlay displays the exact question text: “Will you be my Valentine?”",
-        "There are two visible buttons labeled “Yes” and “No”.",
-        "Clicking “Yes” dismisses the intro overlay and reveals the existing wishing page content."
+        "The old “hitting snooze on Monday mornings” line no longer appears anywhere on the site.",
+        "The hero sub-line appears exactly as: “I like you more than Hange liked titans.”"
       ]
     },
     {
-      "id": "REQ-9",
-      "text": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
+      "id": "REQ-12",
+      "text": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "recent-messages-4"
         ],
         "quotes": [
-          "for no make it playful such that he is not able to click the no button whenever he tries it runs away"
+          "Also the screen with the question will u be my valentine pls remove the blur effect from the back and amke it complete single screen it looks weird"
         ]
       },
       "acceptanceCriteria": [
-        "Attempting to click/tap the “No” button causes it to reposition away from the pointer/finger before the click is registered, preventing a successful “No” click.",
-        "The evasive behavior stays within the viewport (button never becomes unreachable off-screen).",
-        "When `prefers-reduced-motion: reduce` is enabled, the rose petal animation and the evasive motion are disabled or significantly reduced, and the UI remains usable."
+        "The intro overlay no longer applies a backdrop blur effect to the content behind it.",
+        "The intro overlay reads as a clean full-screen experience (solid/clean background) with the rose petal animation still visible.",
+        "The overlay remains responsive on mobile and desktop and retains accessible dialog semantics (role/aria attributes still valid)."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Do not serve images from the backend; any static visuals must be front-end assets or purely CSS/emoji-based.",
-    "Keep all user-facing text in English."
+    "Frontend files under frontend/src/components/ui and the hooks listed in frontend.immutablePaths must not be edited.",
+    "Do not add or require any backend changes (backend/main.mo should remain without new logic unless strictly necessary).",
+    "All user-facing text must remain in English."
   ],
   "nonGoals": [
-    "No backend changes (Motoko actor can remain empty).",
-    "No new authentication or Internet Identity changes.",
-    "No requirement to persist the intro choice across page reloads unless explicitly added later."
+    "Adding new backend persistence or user profiles for audio settings.",
+    "Adding third-party audio streaming/integrations.",
+    "Changing the existing intro overlay Yes/No interaction design beyond removing blur and improving the full-screen feel."
   ],
   "imageRequirements": {
     "required": [],
