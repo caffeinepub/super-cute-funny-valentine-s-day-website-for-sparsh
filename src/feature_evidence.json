@@ -1,4 +1,82 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-update-the-app-s-audio-loading-so-background-music-streams-from-a-full-external-mp3-url-e-g-https-mp3-instead-of-requiring-a-bundled-static-asset-path",
+      "featureTitle": "Update the app’s audio loading so background music streams from a full external MP3 URL (e.g., https://...mp3) instead of requiring a bundled static asset path.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/valentine/ValentineBackgroundMusic.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-audio-url-resolution-explicitly-support-two-modes-1-relative-asset-path-resolved-via-getasseturl-and-2-absolute-http-s-url-used-as-is-and-apply-this-consistently-wherever-audio-is-initialized-including-intro-overlay-ambient-confirm-audio-and-background-music",
+      "featureTitle": "Make audio URL resolution explicitly support two modes: (1) relative asset path resolved via getAssetUrl() and (2) absolute http(s) URL used as-is, and apply this consistently wherever audio is initialized (including intro overlay ambient/confirm audio and background music).",
+      "files": [
+        "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+        "frontend/src/components/valentine/useIntroOverlayAudio.ts",
+        "frontend/src/utils/resolveAudioUrl.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-adapt-the-audio-preflight-diagnostics-behavior-to-work-with-external-audio-urls-including-when-head-requests-are-blocked-and-ensure-failures-produce-actionable-console-diagnostics-without-breaking-the-ui",
+      "featureTitle": "Adapt the audio preflight/diagnostics behavior to work with external audio URLs (including when HEAD requests are blocked), and ensure failures produce actionable console diagnostics without breaking the UI.",
+      "files": [
+        "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+        "frontend/src/utils/audioPreflight.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-audio-setup-and-deployment-troubleshooting-documentation-to-include-instructions-for-streaming-from-an-external-mp3-url-and-remove-replace-statements-that-mandate-only-local-assets-if-streaming-is-selected",
+      "featureTitle": "Update the audio setup and deployment troubleshooting documentation to include instructions for streaming from an external MP3 URL (and remove/replace statements that mandate only local assets if streaming is selected).",
+      "files": [
+        "frontend/DEPLOYMENT_TROUBLESHOOTING.md",
+        "frontend/README_AUDIO_SETUP.md"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

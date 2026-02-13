@@ -1,22 +1,28 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T11:43:11.844Z",
-  "summary": "The diff does not add the required MP3 asset or update any frontend code/asset references; only project_state.json was modified. REQ-28 is therefore not implemented based on the provided diff summary.",
-  "missing_requirements": [
+  "generatedAt": "2026-02-13T14:32:02.331Z",
+  "summary": "Diff adds a shared audio URL resolver supporting absolute http(s) URLs vs relative asset paths, updates background music and intro overlay audio initialization to use it, enhances audio preflight to handle HEAD failures via ranged GET and detect HTML/non-audio responses, and updates audio/deployment docs. However, the diff summary also indicates a bundled MP3 asset was added/retained, which conflicts with the stated non-goal of not copying MP3s into the repo as static assets.",
+  "missing_requirements": [],
+  "hallucinated_features": [
     {
-      "id": "REQ-28",
-      "requirement": "Download the provided MP3 and commit it as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so existing code using getAssetUrl('audio/i-wanna-be-yours.mp3') can load it in production without external hotlinking.",
-      "reason": "No new file was added under frontend/public/assets/audio/, and the only modified file shown is project_state.json. The required MP3 asset is not present in the diff summary, so the app cannot load it as a shipped static asset.",
+      "description": "Bundling a background-music MP3 file into the repository as a static asset (local asset mode) despite the non-goal explicitly forbidding downloading/copying the MP3 into the repository.",
+      "reason": "BuildRequest non-goal says not to add/copy the MP3 into the repo as a static asset; diff summary indicates a binary MP3 exists under public assets.",
       "evidence": [
-        "ADDED FILES: none",
-        "MODIFIED FILES: project_state.json"
+        "frontend-file-summaries.txt (mentions: \"frontend/public/assets/audio/i-wanna-be-yours.mp3\": \"Binary MP3 audio file ...\")"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.86,
+  "confidence": 0.66,
   "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/DEPLOYMENT_TROUBLESHOOTING.md",
+    "frontend/README_AUDIO_SETUP.md",
+    "frontend/src/App.tsx",
+    "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+    "frontend/src/components/valentine/useIntroOverlayAudio.ts",
+    "frontend/src/utils/audioPreflight.ts",
+    "frontend/src/utils/resolveAudioUrl.ts",
     "project_state.json"
   ]
 }

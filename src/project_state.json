@@ -1,225 +1,42 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 37,
-  "summary": "Single-page cute/funny Valentine’s website for Sparsh, now with an intro pop-up Valentine question screen before the main wishing page.",
+  "projectStateVersion": 3,
+  "summary": "New project",
   "architectural_notes": [
-    "If adding background music outside the intro overlay, ensure it respects browser autoplay rules (start only after user interaction) and provide a visible mute/unmute control.",
-    "When adding external links (e.g., YouTube Music), use accessible link/button text and safe target/rel attributes (e.g., target=_blank with rel=\"noopener noreferrer\" if opening a new tab).",
-    "If using user-provided background music (.mp3), load it as a static frontend asset (respect SPA base path), loop playback while the page is active, and stop/pause audio on page hide/unload/navigation; still comply with autoplay rules and keep a visible mute/unmute control.",
-    "Ensure any referenced background-music .mp3 asset is actually committed/included in the frontend static assets (not just referenced by path), so production builds contain the file.",
-    "If user provides an external MP3 URL, download/commit it as a static frontend asset (don’t hotlink) to avoid runtime failures/CORS and ensure it ships in production builds."
+    "Audio should be loaded via external URL streaming (e.g., setting the audio source to an absolute URL), not from a fixed local project path."
   ],
-  "known_issues": [
-    "Build/deployment repeatedly fails with an internal configuration error; may be related to current config/features (user suspects music feature).",
-    "Background-music file path assets/i-wanna-be-yours.mp3 is referenced, but the .mp3 does not appear to be uploaded/included in the codebase; user requests adding the provided/attached file."
-  ],
+  "known_issues": [],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-create-a-single-page-valentine-s-day-website-experience-that-wishes-sparsh-a-happy-valentine-s-day-with-a-super-cute-and-funny-tone-including-a-prominent-headline-a-short-personalized-message-addressing-sparsh-and-playful-microcopy-throughout-all-user-facing-text-in-english",
-      "title": "Create a single-page Valentine's Day website experience that wishes Sparsh a Happy Valentine's Day with a super cute and funny tone, including a prominent headline, a short personalized message addressing “Sparsh”, and playful microcopy throughout (all user-facing text in English).",
+      "id": "feature-update-the-app-s-audio-loading-so-background-music-streams-from-a-full-external-mp3-url-e-g-https-mp3-instead-of-requiring-a-bundled-static-asset-path",
+      "title": "Update the app’s audio loading so background music streams from a full external MP3 URL (e.g., https://...mp3) instead of requiring a bundled static asset path.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-lightweight-interactive-elements-to-make-the-page-feel-fun-and-gift-like-such-as-a-button-that-reveals-a-surprise-message-a-small-set-of-rotating-cute-funny-one-liners-and-a-simple-animation-effect-e-g-floating-hearts-that-does-not-block-reading-or-navigation",
-      "title": "Add lightweight interactive elements to make the page feel fun and “gift-like”, such as a button that reveals a surprise message, a small set of rotating cute/funny one-liners, and a simple animation effect (e.g., floating hearts) that does not block reading or navigation.",
+      "id": "feature-make-audio-url-resolution-explicitly-support-two-modes-1-relative-asset-path-resolved-via-getasseturl-and-2-absolute-http-s-url-used-as-is-and-apply-this-consistently-wherever-audio-is-initialized-including-intro-overlay-ambient-confirm-audio-and-background-music",
+      "title": "Make audio URL resolution explicitly support two modes: (1) relative asset path resolved via getAssetUrl() and (2) absolute http(s) URL used as-is, and apply this consistently wherever audio is initialized (including intro overlay ambient/confirm audio and background music).",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-a-coherent-distinctive-visual-theme-suitable-for-a-valentine-s-greeting-colors-typography-layout-and-decorative-motifs-and-apply-it-consistently-across-the-page-avoid-a-default-stock-look-do-not-use-a-blue-purple-theme",
-      "title": "Implement a coherent, distinctive visual theme suitable for a Valentine’s greeting (colors, typography, layout, and decorative motifs) and apply it consistently across the page. Avoid a default/stock look; do not use a blue & purple theme.",
+      "id": "feature-adapt-the-audio-preflight-diagnostics-behavior-to-work-with-external-audio-urls-including-when-head-requests-are-blocked-and-ensure-failures-produce-actionable-console-diagnostics-without-breaking-the-ui",
+      "title": "Adapt the audio preflight/diagnostics behavior to work with external audio URLs (including when HEAD requests are blocked), and ensure failures produce actionable console diagnostics without breaking the UI.",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-generate-and-include-custom-static-illustration-assets-and-render-them-in-the-ui-from-frontend-public-assets-generated-do-not-serve-images-from-the-backend",
-      "title": "Generate and include custom static illustration assets and render them in the UI from frontend/public/assets/generated (do not serve images from the backend).",
+      "id": "feature-update-the-audio-setup-and-deployment-troubleshooting-documentation-to-include-instructions-for-streaming-from-an-external-mp3-url-and-remove-replace-statements-that-mandate-only-local-assets-if-streaming-is-selected",
+      "title": "Update the audio setup and deployment troubleshooting documentation to include instructions for streaming from an external MP3 URL (and remove/replace statements that mandate only local assets if streaming is selected).",
       "reqIds": [
         "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-site-is-responsive-and-accessible-readable-text-contrast-keyboard-accessible-buttons-sensible-heading-structure-and-a-pleasant-mobile-layout",
-      "title": "Ensure the site is responsive and accessible: readable text contrast, keyboard-accessible buttons, sensible heading structure, and a pleasant mobile layout.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-built-with-love-using-caffeine-ai-line-including-the-caffeine-ai-link-from-the-footer-at-the-end-of-the-page-leaving-the-rest-of-the-footer-intact",
-      "title": "Remove the “Built with love using caffeine.ai” line (including the caffeine.ai link) from the footer at the end of the page, leaving the rest of the footer intact.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-every-instance-of-the-phrase-i-love-you-with-i-like-you-across-all-user-facing-copy-on-the-site-including-hero-copy-and-rotating-one-liners",
-      "title": "Replace every instance of the phrase “I love you” with “I like you” across all user-facing copy on the site (including hero copy and rotating one-liners).",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-an-intro-overlay-screen-that-appears-before-the-existing-valentine-wishing-page-content-showing-a-full-screen-rose-petal-animation-and-the-question-text-will-you-be-my-valentine-with-two-options-yes-and-no-clicking-yes-must-proceed-to-the-existing-wishing-page-content",
-      "title": "Add an intro overlay screen that appears before the existing Valentine wishing page content, showing a full-screen rose petal animation and the question text “Will you be my Valentine?” with two options: “Yes” and “No”. Clicking “Yes” must proceed to the existing wishing page content.",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-make-the-intro-overlay-no-button-playfully-evade-interaction-when-the-user-tries-to-click-tap-it-it-moves-away-so-it-cannot-be-clicked-while-remaining-responsive-and-accessible-including-reduced-motion-support",
-      "title": "Make the intro overlay “No” button playfully evade interaction: when the user tries to click/tap it, it moves away so it cannot be clicked, while remaining responsive and accessible (including reduced-motion support).",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-romantic-sound-effects-to-the-valentine-intro-experience-the-rose-petal-will-you-be-my-valentine-overlay-in-a-way-that-works-with-browser-autoplay-rules-i-e-sound-plays-only-after-a-user-interaction-include-at-least-1-a-subtle-ambient-romantic-background-audio-while-the-intro-overlay-is-visible-and-2-a-short-confirmation-sound-when-the-user-clicks-yes-provide-a-simple-visible-mute-unmute-control-on-the-intro-overlay-and-default-to-muted-until-the-first-user-interaction-enables-audio",
-      "title": "Add romantic sound effects to the Valentine intro experience (the rose-petal “Will you be my Valentine?” overlay) in a way that works with browser autoplay rules (i.e., sound plays only after a user interaction). Include at least: (1) a subtle ambient romantic background audio while the intro overlay is visible, and (2) a short confirmation sound when the user clicks “Yes! 💖”. Provide a simple, visible mute/unmute control on the intro overlay and default to muted until the first user interaction enables audio.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-hero-sub-line-i-like-you-more-than-i-like-hitting-snooze-on-monday-mornings-and-that-s-saying-a-lot-with-the-exact-text-i-like-you-more-than-hange-liked-titans",
-      "title": "Replace the hero sub-line “I like you more than I like hitting snooze on Monday mornings (and that's saying A LOT).” with the exact text: “I like you more than Hange liked titans.”",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-will-you-be-my-valentine-intro-overlay-visuals-to-remove-any-background-blur-and-make-it-feel-like-a-clean-full-screen-single-screen-overlay-not-a-weird-blurred-layer-over-the-page-specifically-remove-the-blur-effect-behind-the-overlay-and-ensure-the-overlay-has-a-solid-clean-full-screen-backdrop-so-the-underlying-page-is-not-visually-competing",
-      "title": "Update the “Will you be my Valentine?” intro overlay visuals to remove any background blur and make it feel like a clean, full-screen single-screen overlay (not a weird blurred layer over the page). Specifically remove the blur effect behind the overlay and ensure the overlay has a solid/clean full-screen backdrop so the underlying page is not visually competing.",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-2026-copyright-dot-text-from-the-bottom-footer-while-keeping-the-rest-of-the-footer-content-intact-e-g-keep-the-made-with-heart-for-sparsh-portion",
-      "title": "Remove the “© 2026 ·” (copyright + dot) text from the bottom/footer while keeping the rest of the footer content intact (e.g., keep the “Made with [heart] for Sparsh” portion).",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-best-teammate-line-text-from-the-site-copy-including-the-fun-facts-why-you-re-the-best-section",
-      "title": "Remove the “Best Teammate” line/text from the site copy (including the Fun Facts/“Why You're the Best 🌟” section).",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-romantic-background-music-for-the-main-valentine-page-experience-not-only-the-intro-overlay-in-a-way-that-respects-browser-autoplay-rules-music-must-start-only-after-a-user-interaction-provide-a-visible-mute-unmute-control-for-this-background-music-and-default-to-muted-until-the-first-user-interaction-enables-audio",
-      "title": "Add romantic background music for the main Valentine page experience (not only the intro overlay) in a way that respects browser autoplay rules (music must start only after a user interaction). Provide a visible mute/unmute control for this background music and default to muted until the first user interaction enables audio.",
-      "reqIds": [
-        "REQ-15"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-inside-the-open-your-valentine-surprise-reveal-content-add-a-carefully-placed-link-to-the-provided-youtube-music-playlist-https-music-youtube-com-playlist-list-pl2qpnj74j0gsi8bxir15n6toxymut0qzx-use-clear-english-link-text-and-ensure-the-link-is-accessible-and-safe-opens-appropriately-with-proper-rel-attributes",
-      "title": "Inside the “Open Your Valentine!” (Surprise reveal) content, add a carefully placed link to the provided YouTube Music playlist: https://music.youtube.com/playlist?list=PL2QPnj74J0GSi8BxiR15N6TOxyMuT0qzX. Use clear English link text and ensure the link is accessible and safe (opens appropriately with proper rel attributes).",
-      "reqIds": [
-        "REQ-16"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-retry-the-build-and-deployment-of-the-current-valentine-single-page-app-and-if-deployment-fails-again-capture-and-present-the-actionable-root-cause-error-details-including-the-failing-step-and-any-relevant-stack-trace-log-excerpt-so-the-failure-can-be-addressed-in-a-follow-up-fix",
-      "title": "Retry the build and deployment of the current Valentine single-page app, and if deployment fails again, capture and present the actionable root-cause error details (including the failing step and any relevant stack trace/log excerpt) so the failure can be addressed in a follow-up fix.",
-      "reqIds": [
-        "REQ-17"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-entire-best-teammate-block-card-from-the-why-you-re-the-best-fun-facts-section-on-the-main-page-so-it-no-longer-appears-anywhere-in-the-ui",
-      "title": "Remove the entire “Best Teammate” block/card from the “Why You're the Best 🌟” (Fun Facts) section on the main page so it no longer appears anywhere in the UI.",
-      "reqIds": [
-        "REQ-18"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-coupon-book-content-inside-the-surprise-reveal-the-revealed-state-of-the-open-your-valentine-section-so-the-heading-and-coupon-items-match-the-user-provided-text-exactly-including-emojis-and-punctuation-specifically-set-the-revealed-coupon-book-title-to-your-valentine-s-coupon-book-and-set-the-coupon-items-to-exactly-1-one-movie-with-snacks-of-your-choice-yes-even-the-weird-ones-2-one-you-pick-what-we-watch-pass-i-promise-i-won-t-complain-3-unlimited-hugs-redeemable-anytime-anywhere-forever-remove-any-other-coupon-items-currently-shown-so-only-these-three-appear",
-      "title": "Update the coupon book content inside the Surprise Reveal (the revealed state of the “Open Your Valentine!” section) so the heading and coupon items match the user-provided text exactly, including emojis and punctuation. Specifically, set the revealed coupon book title to “Your Valentine's Coupon Book! 🎟️” and set the coupon items to exactly:\n1) 🍿 “One movie with snacks of YOUR choice (yes, even the weird ones)”\n2) 🛋️ “One \"you pick what we watch\" pass (I promise I won't complain)”\n3) 🍔 “Unlimited hugs (redeemable anytime, anywhere, forever)”\nRemove any other coupon items currently shown so only these three appear.",
-      "reqIds": [
-        "REQ-19"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-emoji-for-the-third-coupon-item-in-the-revealed-your-valentine-s-coupon-book-list-so-that-unlimited-hugs-redeemable-anytime-anywhere-forever-uses-the-emoji-replacing-the-current-emoji-do-not-change-the-coupon-text",
-      "title": "Update the emoji for the third coupon item in the revealed “Your Valentine's Coupon Book! 🎟️” list so that “Unlimited hugs (redeemable anytime, anywhere, forever)” uses the 🤗 emoji (replacing the current emoji). Do not change the coupon text.",
-      "reqIds": [
-        "REQ-20"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-music-audio-is-actually-present-and-working-in-production-builds-1-the-intro-overlay-ambient-confirmation-sounds-must-load-from-the-correct-spa-base-path-do-not-hardcode-root-assets-paths-and-2-the-main-valentine-page-background-music-feature-is-implemented-and-functional-with-a-visible-mute-unmute-control-and-autoplay-rule-compliance-music-starts-only-after-a-user-interaction-and-defaults-to-muted-until-interaction",
-      "title": "Ensure music/audio is actually present and working in production builds: (1) the intro overlay ambient + confirmation sounds must load from the correct SPA base path (do not hardcode root “/assets/...” paths), and (2) the main Valentine page background music feature is implemented and functional with a visible mute/unmute control and autoplay-rule compliance (music starts only after a user interaction and defaults to muted until interaction).",
-      "reqIds": [
-        "REQ-21"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-the-revealed-state-of-the-open-your-valentine-surprise-reveal-section-add-a-small-button-style-link-placed-under-all-coupon-items-that-navigates-to-the-youtube-music-playlist-https-music-youtube-com-playlist-list-pl2qpnj74j0gsi8bxir15n6toxymut0qzx-use-clear-english-button-link-text-and-implement-the-link-with-accessible-and-safe-behavior-keyboard-focusable-readable-label-and-proper-target-rel-attributes-if-opening-a-new-tab",
-      "title": "In the revealed state of the “Open Your Valentine!” (Surprise reveal) section, add a small button-style link placed under all coupon items that navigates to the YouTube Music playlist: https://music.youtube.com/playlist?list=PL2QPnj74J0GSi8BxiR15N6TOxyMuT0qzX. Use clear English button/link text, and implement the link with accessible and safe behavior (keyboard focusable, readable label, and proper target/rel attributes if opening a new tab).",
-      "reqIds": [
-        "REQ-22"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-retry-the-build-and-deployment-of-the-current-valentine-single-page-application-if-the-deployment-fails-again-capture-and-present-actionable-root-cause-error-details-including-the-failing-step-full-error-message-and-any-relevant-stack-trace-log-excerpt-needed-to-diagnose-and-fix-the-issue",
-      "title": "Retry the build and deployment of the current Valentine single-page application. If the deployment fails again, capture and present actionable root-cause error details, including the failing step, full error message, and any relevant stack trace/log excerpt needed to diagnose and fix the issue.",
-      "reqIds": [
-        "REQ-23"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-rotating-changing-one-liner-copy-so-that-any-one-liner-that-currently-says-coffee-is-changed-to-say-chai-instead-e-g-you-re-better-than-coffee-almost-must-become-you-re-better-than-chai-almost",
-      "title": "Update the rotating/changing one-liner copy so that any one-liner that currently says “coffee” is changed to say “chai” instead (e.g., “You're better than coffee (almost) ☕” must become “You're better than chai (almost) ☕”).",
-      "reqIds": [
-        "REQ-24"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-main-valentine-page-background-music-feature-to-use-the-user-provided-mp3-audio-file-the-mp3-the-user-sent-as-the-looping-background-track-and-ensure-playback-fully-stops-when-the-user-leaves-the-site-e-g-tab-close-navigation-away-or-app-unmount-keep-autoplay-rule-compliance-start-only-after-a-user-interaction-and-keep-the-existing-visible-mute-unmute-control-default-to-muted-until-the-first-user-interaction-unlocks-audio",
-      "title": "Update the main Valentine page background music feature to use the user-provided .mp3 audio file (the .mp3 the user sent) as the looping background track, and ensure playback fully stops when the user leaves the site (e.g., tab close, navigation away, or app unmount). Keep autoplay-rule compliance (start only after a user interaction) and keep the existing visible mute/unmute control; default to muted until the first user interaction unlocks audio.",
-      "reqIds": [
-        "REQ-25"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-the-user-provided-mp3-file-to-the-repository-so-the-existing-background-music-code-can-load-it-at-runtime-specifically-include-the-attached-audio-file-as-a-static-frontend-asset-at-frontend-public-assets-audio-i-wanna-be-yours-mp3-matching-the-current-reference-getasseturl-audio-i-wanna-be-yours-mp3",
-      "title": "Add the user-provided MP3 file to the repository so the existing background-music code can load it at runtime. Specifically, include the attached audio file as a static frontend asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 (matching the current reference getAssetUrl('audio/i-wanna-be-yours.mp3')).",
-      "reqIds": [
-        "REQ-26"
       ],
       "version": 1
     }
@@ -227,119 +44,12 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Create a super cute and funny Valentine's Day website to wish boyfriend Sparsh",
+      "summary": "Support streaming background audio directly from an external MP3 URL (not bundled locally)",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Remove the “Built with love using caffeine.ai” line from the end of the page",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Replace all instances of “I love you” with “I like you” across the site copy",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Add an intro pop-up screen with full-screen rose petal animation and a “Will you be my Valentine?” Yes/No choice (Yes proceeds; No button playfully evades clicks)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Add romantic sound effects to the intro rose-petal Valentine question pop-up",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Replace the rotating one-liner 'instead of hitting snooze on monday' with 'I like you more than Hange liked titans.'",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Remove the blur effect behind the 'Will you be my Valentine?' intro screen and make it a clean full-screen single-screen overlay",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Remove the “© 2026 ·” line from the bottom/footer of the page",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Remove the “best teammate” line/text from the site copy",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "In the “Pizza Partner” section, add the line: “you buy me jar cakes always (so sweet of you)”",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Update the site copy to use the provided “Your Valentine’s Coupon Book!” text and coupon items",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-13",
-      "summary": "Change the emoji used for the “Unlimited hugs (redeemable anytime, anywhere, forever)” coupon item",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-14",
-      "summary": "Add a small button/link under the coupons in “Open Your Valentine!” that navigates to the provided YouTube Music playlist (added carefully with accessible/safe link behavior)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-15",
-      "summary": "In the rotating/changing texts, replace “coffee” with “chai” (e.g., “I like you more than coffee (almost)” → “I like you more than chai (almost)”)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-16",
-      "summary": "Allow user-provided .mp3 file as the site background music (loop while on site; stop when user leaves)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-17",
-      "summary": "Update the site background music to use the alternate MP3 provided via URL (extract/download and include it as the background track)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-18",
-      "summary": "Update the main Valentine page background music track to use the MP3 provided at https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 by downloading/extracting it at build time and committing it into the app as a static asset so production does not depend on that external URL at runtime. Keep the current background-music implementation behavior: it must still load via getAssetUrl(...) (SPA base-path safe), start only after a user interaction (autoplay-rule compliant), default to muted until interaction, loop while the user is on the main page, and fully stop on pagehide/unload/app unmount.",
-      "reqIds": [
-        "REQ-27"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-19",
-      "summary": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it into the repository as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so the existing background-music code (getAssetUrl('audio/i-wanna-be-yours.mp3')) can load it in production without relying on the external URL at runtime.",
-      "reqIds": [
-        "REQ-28"
-      ],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "Super cute & funny Valentine's Day website for Sparsh",
+  "projectName": "Stream app audio directly from an external MP3 URL",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

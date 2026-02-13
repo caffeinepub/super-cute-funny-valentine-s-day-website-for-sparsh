@@ -1,51 +1,93 @@
 {
   "kind": "build_request",
-  "title": "Import provided MP3 into app so background music plays",
+  "title": "Stream app audio directly from an external MP3 URL",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-28",
-      "text": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it into the repository as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so the existing background-music code (getAssetUrl('audio/i-wanna-be-yours.mp3')) can load it in production without relying on the external URL at runtime.",
+      "id": "REQ-1",
+      "text": "Update the app’s audio loading so background music streams from a full external MP3 URL (e.g., https://...mp3) instead of requiring a bundled static asset path.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
-          "msg-6"
+          "recent-messages"
         ],
         "quotes": [
-          "bro are u really adding in the music this link: https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 cuz i dont hear anything at all",
-          "yes add it"
+          "i want the app to stream directly from my external link"
         ]
       },
       "acceptanceCriteria": [
-        "The file frontend/public/assets/audio/i-wanna-be-yours.mp3 exists in the repo and is included in the production build output under the correct base path.",
-        "In a production deployment, after the user has accepted the intro overlay and performs a user interaction to unmute, background music plays audibly and loops (no 404s for the MP3 in the browser Network tab).",
-        "The app does not attempt to load background music from the external URL at runtime; it loads only via getAssetUrl('audio/i-wanna-be-yours.mp3').",
-        "When navigating away/closing the tab/unmounting the app, the background music stops (no continuing audio playback)."
+        "The background music audio element uses the external URL directly (no getAssetUrl() wrapping, no '/assets/audio/...' path assumptions).",
+        "The existing invalid-URL guard (e.g., detecting 'audio/https://') no longer triggers for valid external URLs.",
+        "User-facing error messages remain in English and continue to display if the external stream cannot be loaded or played."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Make audio URL resolution explicitly support two modes: (1) relative asset path resolved via getAssetUrl() and (2) absolute http(s) URL used as-is, and apply this consistently wherever audio is initialized (including intro overlay ambient/confirm audio and background music).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "i want the app to stream directly from my external link"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Relative audio paths (e.g., 'audio/valentine-ambient.mp3') still resolve correctly via getAssetUrl().",
+        "Absolute audio URLs beginning with 'http://' or 'https://' are not modified and are passed directly to new Audio(...).",
+        "No code path constructs concatenated URLs like 'audio/https://...'."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Adapt the audio preflight/diagnostics behavior to work with external audio URLs (including when HEAD requests are blocked), and ensure failures produce actionable console diagnostics without breaking the UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "i want the app to stream directly from my external link"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If a HEAD request fails for an external URL, preflight falls back to a GET (range) check and returns a meaningful result.",
+        "If the external URL returns HTML (or a non-audio response), the app reports a clear error state (console + existing UI alert behavior) rather than silently failing.",
+        "When the external URL is reachable and is audio, preflight succeeds and playback can be started via the existing unmute interaction."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Update the audio setup and deployment troubleshooting documentation to include instructions for streaming from an external MP3 URL (and remove/replace statements that mandate only local assets if streaming is selected).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "i want the app to stream directly from my external link"
+        ]
+      },
+      "acceptanceCriteria": [
+        "README_AUDIO_SETUP.md explains how to configure an external MP3 URL for streaming and clarifies that local files are only required when using local asset mode.",
+        "DEPLOYMENT_TROUBLESHOOTING.md includes external streaming checks (e.g., verifying the external URL is reachable, CORS/content-type considerations) in addition to existing local-asset checks.",
+        "All documentation is written in English."
       ]
     }
   ],
   "constraints": [
-    "Frontend files listed as immutable by the system must not be edited (compose instead).",
-    "Do not hotlink the MP3 at runtime; ship it as a static asset in frontend/public/assets/audio/.",
-    "Keep asset loading SPA base-path safe by continuing to use getAssetUrl(...) for audio file paths."
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or any files in frontend/src/components/ui (compose them instead).",
+    "Keep the backend as a single Motoko actor; do not introduce additional backend services."
   ],
   "nonGoals": [
-    "Changing the existing background-music UX/controls or autoplay/unmute behavior beyond what is necessary to make the audio file actually present and loadable.",
-    "Adding any backend storage or serving for audio files."
+    "Downloading/copying the MP3 into the repository as a static asset.",
+    "Adding third-party authentication providers or any non-Internet-Identity auth.",
+    "Implementing real-time streaming protocols beyond standard HTML5 audio playback of an external URL.",
+    "Backend changes for proxying the external audio URL."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

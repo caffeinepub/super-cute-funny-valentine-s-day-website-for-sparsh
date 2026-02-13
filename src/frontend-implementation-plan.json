@@ -1,27 +1,94 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Ship bundled background music MP3 as static asset for production-safe playback",
+  "title": "External MP3 streaming support for all in-app audio",
   "requirements": [
     {
-      "id": "REQ-28",
-      "summary": "Commit the provided MP3 into frontend/public so existing getAssetUrl('audio/i-wanna-be-yours.mp3') background-music code can load it in production without hotlinking.",
+      "id": "REQ-1",
+      "summary": "Allow background music to stream directly from an absolute external MP3 URL without asset-path assumptions.",
       "acceptanceCriteria": [
-        "The file frontend/public/assets/audio/i-wanna-be-yours.mp3 exists in the repo and is included in the production build output under the correct base path.",
-        "In a production deployment, after the user has accepted the intro overlay and performs a user interaction to unmute, background music plays audibly and loops (no 404s for the MP3 in the browser Network tab).",
-        "The app does not attempt to load background music from the external URL at runtime; it loads only via getAssetUrl('audio/i-wanna-be-yours.mp3').",
-        "When navigating away/closing the tab/unmounting the app, the background music stops (no continuing audio playback)."
+        "The background music audio element uses the external URL directly (no getAssetUrl() wrapping, no '/assets/audio/...' path assumptions).",
+        "The existing invalid-URL guard (e.g., detecting 'audio/https://') no longer triggers for valid external URLs.",
+        "User-facing error messages remain in English and continue to display if the external stream cannot be loaded or played."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/audio/i-wanna-be-yours.mp3",
+          "path": "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "operation": "modify",
+          "description": "Update background-music initialization to accept a configurable music source that can be either a relative asset path or an absolute http(s) URL; ensure Audio(...) receives the correctly resolved URL. Replace the current guard that flags 'audio/https://' so it only errors on truly malformed constructed URLs, not valid absolute URLs. Keep existing English UI error behavior and continue to use the shadcn-ui Button component for mute/error UI (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire a configurable background music source into ValentineBackgroundMusic (e.g., from a single app-level constant or build-time env var with a safe default) so the app can be switched to an external MP3 URL without bundling a local asset."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement a single audio URL resolution utility supporting both relative assets (via getAssetUrl) and absolute http(s) URLs, used consistently across all audio initializations.",
+      "acceptanceCriteria": [
+        "Relative audio paths (e.g., 'audio/valentine-ambient.mp3') still resolve correctly via getAssetUrl().",
+        "Absolute audio URLs beginning with 'http://' or 'https://' are not modified and are passed directly to new Audio(...).",
+        "No code path constructs concatenated URLs like 'audio/https://...'."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/resolveAudioUrl.ts",
           "operation": "create",
-          "description": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it at this exact path so getAssetUrl('audio/i-wanna-be-yours.mp3') resolves base-path safely in production and does not rely on the external URL at runtime."
+          "description": "Create a small shared utility that resolves audio sources in two explicit modes: relative paths resolved via getAssetUrl(), and absolute http(s) URLs passed through as-is; include basic normalization/validation to prevent accidental concatenation patterns (e.g., 'audio/https://')."
         },
         {
           "path": "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
           "operation": "modify",
-          "description": "Verify background music continues to load exclusively via getAssetUrl('audio/i-wanna-be-yours.mp3') (no external URL fallback) and that teardown reliably stops audio on unmount/pagehide/beforeunload to prevent continued playback."
+          "description": "Adopt the shared audio URL resolver so background music uses the same relative-vs-absolute resolution logic everywhere (preflight + Audio element initialization). Continue using existing shadcn-ui Button UI (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/components/valentine/useIntroOverlayAudio.ts",
+          "operation": "modify",
+          "description": "Update intro overlay ambient and confirm audio initialization to use the shared audio URL resolver (supporting both relative asset paths and absolute external URLs) so behavior is consistent across the app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Enhance audio preflight/diagnostics to handle external URLs (including HEAD-blocked cases) with actionable console logs while keeping the UI stable.",
+      "acceptanceCriteria": [
+        "If a HEAD request fails for an external URL, preflight falls back to a GET (range) check and returns a meaningful result.",
+        "If the external URL returns HTML (or a non-audio response), the app reports a clear error state (console + existing UI alert behavior) rather than silently failing.",
+        "When the external URL is reachable and is audio, preflight succeeds and playback can be started via the existing unmute interaction."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/audioPreflight.ts",
+          "operation": "modify",
+          "description": "Adapt preflight to be robust for external URLs: keep HEAD-then-GET(range) behavior, improve handling when fetch fails due to CORS/blocked HEAD/blocked range (return a meaningful failure result with actionable diagnostics), and add lightweight content sniffing when headers are missing/ambiguous to better distinguish HTML vs audio without breaking UI flows."
+        },
+        {
+          "path": "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "operation": "modify",
+          "description": "Update preflight invocation/logging to reflect external streaming scenarios (e.g., CORS/content-type issues) and ensure failures continue to surface as existing English UI alerts without crashing or blocking rendering. Continue using shadcn-ui Button UI (Verify the component's usage instructions before implementing.)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Update audio setup and deployment troubleshooting docs to cover external MP3 streaming alongside local asset mode.",
+      "acceptanceCriteria": [
+        "README_AUDIO_SETUP.md explains how to configure an external MP3 URL for streaming and clarifies that local files are only required when using local asset mode.",
+        "DEPLOYMENT_TROUBLESHOOTING.md includes external streaming checks (e.g., verifying the external URL is reachable, CORS/content-type considerations) in addition to existing local-asset checks.",
+        "All documentation is written in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/README_AUDIO_SETUP.md",
+          "operation": "modify",
+          "description": "Rewrite audio setup documentation to describe two supported modes (local asset mode using getAssetUrl + files under frontend/public/assets/audio/, and external streaming mode using an absolute http(s) MP3 URL). Remove/replace statements that forbid remote URLs, and document where to configure the external URL in the app."
+        },
+        {
+          "path": "frontend/DEPLOYMENT_TROUBLESHOOTING.md",
+          "operation": "modify",
+          "description": "Extend troubleshooting to include external streaming diagnostics: verifying the external URL returns audio (not HTML), content-type expectations, potential CORS/HEAD limitations, and how to interpret the app’s console diagnostics—while keeping existing local-asset checks intact."
         }
       ]
     }

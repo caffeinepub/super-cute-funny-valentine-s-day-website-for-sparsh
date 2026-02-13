@@ -1,11 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Bundle the provided “I Wanna Be Yours” MP3 into the app so background music reliably loads and plays in production without hotlinking.
+**Goal:** Allow the app to stream background music and other audio directly from an external MP3 URL while preserving support for bundled/relative audio assets.
 
 **Planned changes:**
-- Download and commit the MP3 into the repo at `frontend/public/assets/audio/i-wanna-be-yours.mp3`.
-- Ensure the existing background-music loader continues to reference only `getAssetUrl('audio/i-wanna-be-yours.mp3')` so it resolves correctly under the SPA base path.
-- Verify background music loops after the intro overlay is accepted and the user performs the required interaction to unmute, and that audio stops when the app unmounts/tab closes.
+- Update audio URL resolution to support two explicit modes: relative asset paths resolved via `getAssetUrl()` and absolute `http(s)` URLs used as-is, applied consistently for background music and intro overlay ambient/confirm audio.
+- Adjust audio validation/guard logic so valid external URLs are not flagged (and no concatenated paths like `audio/https://...` are ever constructed).
+- Update audio preflight/diagnostics to work with external URLs, including fallback behavior when `HEAD` is blocked and clearer error reporting for non-audio responses, without breaking the UI.
+- Update `README_AUDIO_SETUP.md` and `DEPLOYMENT_TROUBLESHOOTING.md` to document external MP3 streaming configuration and related troubleshooting (reachability, CORS/content-type), in English.
 
-**User-visible outcome:** After dismissing the intro overlay and interacting to unmute, users hear looping background music in production (no missing/404 audio), and it stops when they leave/close the app.
+**User-visible outcome:** Users can configure the app to play audio from a full external MP3 link (or continue using local asset audio), and will see existing English error messaging if the stream can’t be loaded or played.

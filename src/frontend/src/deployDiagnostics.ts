@@ -2,7 +2,7 @@
  * Deployment diagnostics module.
  * Logs startup information and captures runtime errors for troubleshooting deployment issues.
  * Enhanced to capture actionable root-cause details including resource load failures,
- * environment context, and comprehensive error serialization.
+ * environment context, comprehensive error serialization, and media-related failures.
  */
 
 export function initDeployDiagnostics(): void {
@@ -17,22 +17,38 @@ export function initDeployDiagnostics(): void {
   console.log('[Deploy Diagnostics] Viewport:', `${window.innerWidth}x${window.innerHeight}`);
   console.log('[Deploy Diagnostics] ========================================');
 
-  // Track resource load failures (scripts, stylesheets, images, etc.)
+  // Track resource load failures (scripts, stylesheets, images, audio, etc.)
   window.addEventListener('error', (event) => {
     // Check if this is a resource loading error
     if (event.target && event.target !== window) {
       const target = event.target as HTMLElement;
       const tagName = target.tagName?.toLowerCase();
       
-      if (tagName === 'script' || tagName === 'link' || tagName === 'img') {
-        console.error('[Deploy Diagnostics] Resource load failure:', {
+      if (tagName === 'script' || tagName === 'link' || tagName === 'img' || tagName === 'audio' || tagName === 'video') {
+        const resourceInfo: any = {
           type: 'ResourceLoadError',
           tagName: tagName,
-          src: (target as HTMLScriptElement | HTMLImageElement).src || (target as HTMLLinkElement).href,
-          currentSrc: (target as HTMLImageElement).currentSrc,
+          src: (target as HTMLScriptElement | HTMLImageElement | HTMLAudioElement).src || (target as HTMLLinkElement).href,
+          currentSrc: (target as HTMLImageElement | HTMLAudioElement).currentSrc,
           baseURI: target.baseURI,
           timestamp: new Date().toISOString()
-        });
+        };
+
+        // Add media-specific diagnostics for audio/video elements
+        if (tagName === 'audio' || tagName === 'video') {
+          const mediaElement = target as HTMLAudioElement | HTMLVideoElement;
+          resourceInfo.mediaDetails = {
+            networkState: mediaElement.networkState,
+            readyState: mediaElement.readyState,
+            error: mediaElement.error ? {
+              code: mediaElement.error.code,
+              message: mediaElement.error.message
+            } : null,
+            hint: 'Media load failure - check if asset exists and returns correct content-type (not HTML)'
+          };
+        }
+
+        console.error('[Deploy Diagnostics] Resource load failure:', resourceInfo);
         return;
       }
     }
@@ -59,6 +75,7 @@ export function initDeployDiagnostics(): void {
     
     // Serialize the rejection reason comprehensively
     let serializedReason: any;
+    let failureCategory: string | undefined;
     
     if (reason instanceof Error) {
       serializedReason = {
@@ -67,6 +84,19 @@ export function initDeployDiagnostics(): void {
         stack: reason.stack,
         cause: reason.cause
       };
+
+      // Categorize common media/asset failures
+      if (reason.name === 'NotAllowedError') {
+        failureCategory = 'autoplay-restriction';
+      } else if (reason.name === 'NotSupportedError') {
+        failureCategory = 'codec-support';
+      } else if (reason.name === 'AbortError') {
+        failureCategory = 'operation-aborted';
+      } else if (reason.message?.includes('fetch') || reason.message?.includes('network')) {
+        failureCategory = 'network-failure';
+      } else if (reason.message?.includes('HTML') || reason.message?.includes('text/html')) {
+        failureCategory = 'asset-load-html-fallback';
+      }
     } else if (typeof reason === 'object' && reason !== null) {
       try {
         serializedReason = JSON.parse(JSON.stringify(reason));
@@ -82,7 +112,11 @@ export function initDeployDiagnostics(): void {
       reason: serializedReason,
       reasonType: typeof reason,
       reasonConstructor: reason?.constructor?.name,
-      timestamp: new Date().toISOString()
+      failureCategory,
+      timestamp: new Date().toISOString(),
+      hint: failureCategory === 'asset-load-html-fallback' 
+        ? 'Asset likely missing - server returned HTML instead of expected resource'
+        : undefined
     });
   });
 

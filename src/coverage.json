@@ -1,31 +1,83 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T11:43:11.847Z",
+  "generatedAt": "2026-02-13T14:32:02.334Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 0,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-28",
-        "summary": "Download the MP3 from https://image2url.com/r2/default/audio/1770895970075-efc8efc8-d8ca-4014-a506-846ed3573d6b.mp3 and commit it into the repository as a static asset at frontend/public/assets/audio/i-wanna-be-yours.mp3 so the existing background-music code (getAssetUrl('audio/i-wanna-be-yours.mp3')) can load it in production without relying on the external URL at runtime.",
-        "status": "missing",
+        "id": "REQ-1",
+        "summary": "Update the app’s audio loading so background music streams from a full external MP3 URL (e.g., https://...mp3) instead of requiring a bundled static asset path.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/audio/i-wanna-be-yours.mp3",
+          "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Make audio URL resolution explicitly support two modes: (1) relative asset path resolved via getAssetUrl() and (2) absolute http(s) URL used as-is, and apply this consistently wherever audio is initialized (including intro overlay ambient/confirm audio and background music).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/resolveAudioUrl.ts",
+          "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "frontend/src/components/valentine/useIntroOverlayAudio.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/resolveAudioUrl.ts",
+          "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+          "frontend/src/components/valentine/useIntroOverlayAudio.ts"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Adapt the audio preflight/diagnostics behavior to work with external audio URLs (including when HEAD requests are blocked), and ensure failures produce actionable console diagnostics without breaking the UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/audioPreflight.ts",
           "frontend/src/components/valentine/ValentineBackgroundMusic.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/utils/audioPreflight.ts",
+          "frontend/src/components/valentine/ValentineBackgroundMusic.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Update the audio setup and deployment troubleshooting documentation to include instructions for streaming from an external MP3 URL (and remove/replace statements that mandate only local assets if streaming is selected).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/README_AUDIO_SETUP.md",
+          "frontend/DEPLOYMENT_TROUBLESHOOTING.md"
+        ],
+        "matchedFiles": [
+          "frontend/README_AUDIO_SETUP.md",
+          "frontend/DEPLOYMENT_TROUBLESHOOTING.md"
+        ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/DEPLOYMENT_TROUBLESHOOTING.md",
+    "frontend/README_AUDIO_SETUP.md",
+    "frontend/src/App.tsx",
+    "frontend/src/components/valentine/ValentineBackgroundMusic.tsx",
+    "frontend/src/components/valentine/useIntroOverlayAudio.ts",
+    "frontend/src/utils/audioPreflight.ts",
+    "frontend/src/utils/resolveAudioUrl.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

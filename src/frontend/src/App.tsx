@@ -8,6 +8,12 @@ import { Heart } from 'lucide-react';
 import { getAssetUrl } from './utils/assetBase';
 import { initDeployDiagnostics } from './deployDiagnostics';
 
+// Configure background music source
+// Use either:
+// - A relative path for local assets: 'audio/i-wanna-be-yours.mp3'
+// - An absolute URL for external streaming: 'https://example.com/music.mp3'
+const BACKGROUND_MUSIC_SOURCE = 'https://image2url.com/download/I_Wanna_Be_Yours%20(mp3cut.net)-1.mp3';
+
 function App() {
   const [showSurprise, setShowSurprise] = useState(false);
   const [hasAcceptedValentine, setHasAcceptedValentine] = useState(false);
@@ -31,7 +37,10 @@ function App() {
       )}
 
       {/* Background Music (active after intro overlay is accepted) */}
-      <ValentineBackgroundMusic isActive={hasAcceptedValentine} />
+      <ValentineBackgroundMusic 
+        isActive={hasAcceptedValentine} 
+        musicSource={BACKGROUND_MUSIC_SOURCE}
+      />
 
       <div className="relative z-10">
         {/* Header */}
